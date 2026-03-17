@@ -98,7 +98,7 @@ nav ul a:hover {
   display: flex;
   align-items: center;
   position: relative;
-  padding: 0 4rem;
+  padding: 6rem 4rem 0;
   overflow: hidden;
 }
 
@@ -1243,7 +1243,7 @@ footer .footer-logo {
   }
 
   #hero {
-    padding: 0 1.5rem;
+    padding: 5rem 1.5rem 0;
   }
 
   .hero-social {
