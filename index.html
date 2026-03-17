@@ -938,7 +938,7 @@
         <span class="meta-icon">✉️</span>
         <div>
           <span class="meta-label">Email</span>
-          <span class="meta-value">alejandro1052004@gmail.com</span>
+          <span class="meta-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="87e6ebe2ede6e9e3f5e8b6b7b2b5b7b7b3c7e0eae6eeeba9e4e8ea">[email&#160;protected]</a></span>
         </div>
       </div>
       <div class="meta-item">
@@ -1350,8 +1350,8 @@
   <p class="contact-desc reveal">Abierto a nuevas oportunidades, colaboraciones y proyectos interesantes.</p>
 
   <div class="contact-links reveal">
-    <a href="mailto:alejandro1052004@gmail.com" class="contact-item">
-      ✉️ alejandro1052004@gmail.com
+    <a href="/cdn-cgi/l/email-protection#01606d646b606f65736e3031343331313541666c60686d2f626e6c" class="contact-item">
+      ✉️ <span class="__cf_email__" data-cfemail="5e3f323b343f303a2c316f6e6b6c6e6e6a1e39333f3732703d3133">[email&#160;protected]</span>
     </a>
     <a href="tel:+34685817945" class="contact-item">
       📱 685 81 79 45
@@ -1372,36 +1372,6 @@
   <p style="opacity:0.5;">Diseñado con precisión</p>
 </footer>
 
-<script>
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => {
-          entry.target.classList.add('visible');
-        }, 80);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-  reveals.forEach(el => observer.observe(el));
-
-  // Nav scroll effect
-  const nav = document.querySelector('nav');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      nav.style.background = 'rgba(10,10,15,0.97)';
-    } else {
-      nav.style.background = 'rgba(10,10,15,0.85)';
-    }
-  });
-
-  // Smooth stagger for grid cards
-  document.querySelectorAll('.skills-grid .skill-card, .projects-grid .project-card, .certs-grid .cert-item').forEach((el, i) => {
-    el.style.transitionDelay = `${(i % 4) * 0.07}s`;
-  });
-</script>
+<script src="assets/js/main.js"></script>
 </body>
 </html>
