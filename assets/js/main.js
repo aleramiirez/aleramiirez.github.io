@@ -27,3 +27,10 @@ window.addEventListener('scroll', () => {
 document.querySelectorAll('.skills-grid .skill-card, .projects-grid .project-card, .certs-grid .cert-item').forEach((el, i) => {
   el.style.transitionDelay = `${(i % 4) * 0.07}s`;
 });
+
+// Proteger email de bots
+document.querySelectorAll('[data-email]').forEach(el => {
+  const email = el.getAttribute('data-email');
+  el.href = 'mailto:' + email;
+  el.textContent = email;
+});
