@@ -1,6 +1,6 @@
 # Portfolio — Alejandro Ramírez
 
-Portfolio personal que muestra mi experiencia como desarrollador de software, especializado en microservicios Java, Kubernetes/OpenShift, Apache Kafka e infraestructura cloud (Azure, GCP).
+Portfolio personal que muestra mi experiencia como desarrollador de software, especializado en microservicios Java, Kubernetes/OpenShift, Apache Kafka e infraestructura.
 
 ## Tecnologías utilizadas
 - HTML, CSS y JavaScript puro (sin frameworks)
