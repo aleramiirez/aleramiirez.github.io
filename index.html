@@ -10,987 +10,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap"
     rel="stylesheet">
-  <style>
-    :root {
-      --bg: #0a0a0f;
-      --bg2: #0f0f18;
-      --bg3: #13131f;
-      --card: #111120;
-      --gold: #c9a84c;
-      --gold-light: #e8c97a;
-      --gold-dim: rgba(201, 168, 76, 0.15);
-      --gold-border: rgba(201, 168, 76, 0.25);
-      --text: #e8e4da;
-      --text-dim: #8a8474;
-      --text-mid: #b8b0a0;
-      --accent: #4c7ac9;
-      --accent2: #c94c7a;
-      --white: #f5f2ed;
-    }
-
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Outfit', sans-serif;
-      font-weight: 300;
-      line-height: 1.7;
-      overflow-x: hidden;
-    }
-
-    /* ─── NOISE OVERLAY ─── */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 999;
-      opacity: 0.4;
-    }
-
-    /* ─── NAV ─── */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.5rem 4rem;
-      background: rgba(10, 10, 15, 0.85);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(201, 168, 76, 0.08);
-      transition: all 0.3s ease;
-    }
-
-    nav .logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.4rem;
-      font-weight: 600;
-      color: var(--gold);
-      letter-spacing: 0.05em;
-      text-decoration: none;
-    }
-
-    nav ul {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
-    }
-
-    nav ul a {
-      color: var(--text-dim);
-      text-decoration: none;
-      font-size: 0.78rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      transition: color 0.3s;
-      font-weight: 400;
-    }
-
-    nav ul a:hover {
-      color: var(--gold);
-    }
-
-    /* ─── HERO ─── */
-    #hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      position: relative;
-      padding: 0 4rem;
-      overflow: hidden;
-    }
-
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 60% 50% at 70% 50%, rgba(76, 122, 201, 0.06) 0%, transparent 60%),
-        radial-gradient(ellipse 40% 60% at 20% 80%, rgba(201, 168, 76, 0.04) 0%, transparent 50%);
-    }
-
-    .hero-line {
-      position: absolute;
-      top: 0;
-      right: 30%;
-      width: 1px;
-      height: 100%;
-      background: linear-gradient(to bottom, transparent, var(--gold-border), transparent);
-      opacity: 0.4;
-    }
-
-    .hero-content {
-      position: relative;
-      max-width: 700px;
-    }
-
-    .hero-tag {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.72rem;
-      color: var(--gold);
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
-      opacity: 0;
-      animation: fadeUp 0.8s 0.2s forwards;
-    }
-
-    .hero-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(3.5rem, 7vw, 6rem);
-      font-weight: 300;
-      line-height: 1;
-      letter-spacing: -0.02em;
-      color: var(--white);
-      margin-bottom: 0.2rem;
-      opacity: 0;
-      animation: fadeUp 0.8s 0.35s forwards;
-    }
-
-    .hero-name span {
-      color: var(--gold);
-      font-style: italic;
-    }
-
-    .hero-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.4rem, 3vw, 2rem);
-      font-weight: 300;
-      color: var(--text-dim);
-      margin-bottom: 2rem;
-      font-style: italic;
-      opacity: 0;
-      animation: fadeUp 0.8s 0.5s forwards;
-    }
-
-    .hero-desc {
-      font-size: 1rem;
-      color: var(--text-mid);
-      max-width: 520px;
-      line-height: 1.8;
-      margin-bottom: 3rem;
-      opacity: 0;
-      animation: fadeUp 0.8s 0.65s forwards;
-    }
-
-    .hero-ctas {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      opacity: 0;
-      animation: fadeUp 0.8s 0.8s forwards;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.85rem 2rem;
-      font-size: 0.78rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      text-decoration: none;
-      font-weight: 500;
-      transition: all 0.3s;
-      cursor: pointer;
-      border: none;
-      font-family: 'Outfit', sans-serif;
-    }
-
-    .btn-gold {
-      background: var(--gold);
-      color: #0a0a0f;
-    }
-
-    .btn-gold:hover {
-      background: var(--gold-light);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(201, 168, 76, 0.3);
-    }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--gold);
-      border: 1px solid var(--gold-border);
-    }
-
-    .btn-outline:hover {
-      background: var(--gold-dim);
-      border-color: var(--gold);
-    }
-
-    .hero-social {
-      position: absolute;
-      right: 4rem;
-      top: 50%;
-      transform: translateY(-50%);
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      align-items: center;
-      opacity: 0;
-      animation: fadeIn 1s 1s forwards;
-    }
-
-    .hero-social::before,
-    .hero-social::after {
-      content: '';
-      width: 1px;
-      height: 60px;
-      background: linear-gradient(to bottom, transparent, var(--gold-border));
-    }
-
-    .hero-social::after {
-      background: linear-gradient(to top, transparent, var(--gold-border));
-    }
-
-    .social-icon {
-      width: 38px;
-      height: 38px;
-      border: 1px solid var(--gold-border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-dim);
-      text-decoration: none;
-      font-size: 0.85rem;
-      transition: all 0.3s;
-    }
-
-    .social-icon:hover {
-      border-color: var(--gold);
-      color: var(--gold);
-      background: var(--gold-dim);
-    }
-
-    /* ─── SECTIONS ─── */
-    section {
-      padding: 7rem 4rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      margin-bottom: 4rem;
-    }
-
-    .section-num {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--gold);
-      letter-spacing: 0.15em;
-      opacity: 0.7;
-    }
-
-    .section-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 300;
-      color: var(--white);
-      letter-spacing: -0.01em;
-    }
-
-    .section-line {
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(to right, var(--gold-border), transparent);
-    }
-
-    /* ─── ABOUT ─── */
-    #about {
-      border-top: 1px solid rgba(255, 255, 255, 0.04);
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: start;
-    }
-
-    .about-text p {
-      color: var(--text-mid);
-      font-size: 1.05rem;
-      line-height: 1.9;
-      margin-bottom: 1.5rem;
-    }
-
-    .about-meta {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .meta-item {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 1rem 1.2rem;
-      border: 1px solid var(--gold-border);
-      background: var(--card);
-      transition: all 0.3s;
-    }
-
-    .meta-item:hover {
-      border-color: var(--gold);
-      background: rgba(201, 168, 76, 0.04);
-    }
-
-    .meta-icon {
-      font-size: 1.1rem;
-      color: var(--gold);
-      width: 24px;
-      text-align: center;
-    }
-
-    .meta-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--text-dim);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      display: block;
-    }
-
-    .meta-value {
-      font-size: 0.9rem;
-      color: var(--text);
-    }
-
-    /* ─── EXPERIENCE ─── */
-    #experience {
-      background: var(--bg2);
-      max-width: 100%;
-      padding: 7rem 0;
-    }
-
-    #experience .inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 4rem;
-    }
-
-    .exp-timeline {
-      position: relative;
-      padding-left: 2rem;
-    }
-
-    .exp-timeline::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 1px;
-      background: linear-gradient(to bottom, var(--gold-border), rgba(201, 168, 76, 0.05));
-    }
-
-    .exp-item {
-      position: relative;
-      padding: 2.5rem 0 2.5rem 3rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-    }
-
-    .exp-item:last-child {
-      border-bottom: none;
-    }
-
-    .exp-dot {
-      position: absolute;
-      left: -0.45rem;
-      top: 2.8rem;
-      width: 9px;
-      height: 9px;
-      border: 1px solid var(--gold);
-      background: var(--bg2);
-      transform: rotate(45deg);
-      transition: background 0.3s;
-    }
-
-    .exp-item:hover .exp-dot {
-      background: var(--gold);
-    }
-
-    .exp-period {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.68rem;
-      color: var(--gold);
-      letter-spacing: 0.1em;
-      margin-bottom: 0.4rem;
-    }
-
-    .exp-role {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.6rem;
-      font-weight: 400;
-      color: var(--white);
-      margin-bottom: 0.2rem;
-    }
-
-    .exp-company {
-      font-size: 0.85rem;
-      color: var(--text-dim);
-      margin-bottom: 1rem;
-      letter-spacing: 0.05em;
-    }
-
-    .exp-company span {
-      color: var(--gold);
-      font-style: italic;
-    }
-
-    .exp-desc {
-      color: var(--text-mid);
-      font-size: 0.95rem;
-      line-height: 1.85;
-      max-width: 680px;
-    }
-
-    .exp-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 1.2rem;
-    }
-
-    .tag {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      padding: 0.3rem 0.8rem;
-      border: 1px solid var(--gold-border);
-      color: var(--gold);
-      letter-spacing: 0.08em;
-      background: var(--gold-dim);
-    }
-
-    /* ─── SKILLS ─── */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .skill-card {
-      background: var(--card);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      padding: 2rem;
-      transition: all 0.3s;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .skill-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(to right, var(--gold), transparent);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-
-    .skill-card:hover {
-      border-color: var(--gold-border);
-      transform: translateY(-4px);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    }
-
-    .skill-card:hover::before {
-      opacity: 1;
-    }
-
-    .skill-category {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--gold);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-bottom: 1.2rem;
-    }
-
-    .skill-icon {
-      font-size: 1.5rem;
-      margin-bottom: 0.8rem;
-    }
-
-    .skill-items {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-    }
-
-    .skill-item {
-      font-size: 0.8rem;
-      color: var(--text-mid);
-      background: rgba(255, 255, 255, 0.04);
-      padding: 0.25rem 0.6rem;
-      border-radius: 0;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      transition: all 0.2s;
-    }
-
-    .skill-item:hover {
-      color: var(--gold);
-      border-color: var(--gold-border);
-      background: var(--gold-dim);
-    }
-
-    /* ─── PROJECTS ─── */
-    #projects {
-      background: var(--bg2);
-      max-width: 100%;
-      padding: 7rem 0;
-    }
-
-    #projects .inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 4rem;
-    }
-
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 2rem;
-    }
-
-    .project-card {
-      background: var(--card);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      padding: 2.5rem;
-      transition: all 0.4s;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .project-card::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(to right, var(--gold), var(--accent));
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.4s ease;
-    }
-
-    .project-card:hover {
-      border-color: var(--gold-border);
-      transform: translateY(-6px);
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
-    }
-
-    .project-card:hover::after {
-      transform: scaleX(1);
-    }
-
-    .project-num {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.6rem;
-      color: var(--text-dim);
-      letter-spacing: 0.15em;
-      margin-bottom: 1.5rem;
-      opacity: 0.5;
-    }
-
-    .project-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.6rem;
-      font-weight: 400;
-      color: var(--white);
-      margin-bottom: 0.5rem;
-      line-height: 1.2;
-    }
-
-    .project-subtitle {
-      font-size: 0.78rem;
-      color: var(--gold);
-      font-family: 'DM Mono', monospace;
-      letter-spacing: 0.08em;
-      margin-bottom: 1.2rem;
-    }
-
-    .project-desc {
-      color: var(--text-mid);
-      font-size: 0.9rem;
-      line-height: 1.85;
-      flex: 1;
-      margin-bottom: 1.5rem;
-    }
-
-    .project-techs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .project-tech {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.6rem;
-      color: var(--accent);
-      border: 1px solid rgba(76, 122, 201, 0.25);
-      padding: 0.2rem 0.6rem;
-      background: rgba(76, 122, 201, 0.06);
-    }
-
-    .project-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: var(--gold);
-      text-decoration: none;
-      font-size: 0.78rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      font-weight: 500;
-      transition: gap 0.3s;
-    }
-
-    .project-link:hover {
-      gap: 0.8rem;
-    }
-
-    /* ─── EDUCATION ─── */
-    .edu-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .edu-card {
-      padding: 2rem;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      background: var(--card);
-      position: relative;
-      transition: all 0.3s;
-    }
-
-    .edu-card:hover {
-      border-color: var(--gold-border);
-    }
-
-    .edu-year {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--gold);
-      letter-spacing: 0.12em;
-      margin-bottom: 0.8rem;
-    }
-
-    .edu-degree {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.25rem;
-      color: var(--white);
-      margin-bottom: 0.4rem;
-      line-height: 1.3;
-    }
-
-    .edu-institution {
-      font-size: 0.85rem;
-      color: var(--text-dim);
-      margin-bottom: 0.3rem;
-    }
-
-    .edu-location {
-      font-size: 0.78rem;
-      color: var(--text-dim);
-      opacity: 0.6;
-    }
-
-    /* ─── CERTIFICATIONS ─── */
-    #certifications {
-      background: var(--bg2);
-      max-width: 100%;
-      padding: 7rem 0;
-    }
-
-    #certifications .inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 4rem;
-    }
-
-    .certs-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.2rem;
-    }
-
-    .cert-category-title {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--gold);
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
-      margin-top: 3rem;
-      padding-bottom: 0.8rem;
-      border-bottom: 1px solid var(--gold-border);
-    }
-
-    .cert-item {
-      display: flex;
-      gap: 1rem;
-      padding: 1.2rem;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      background: var(--card);
-      transition: all 0.3s;
-      text-decoration: none;
-      color: inherit;
-      align-items: flex-start;
-    }
-
-    .cert-item:hover {
-      border-color: var(--gold-border);
-      background: rgba(201, 168, 76, 0.03);
-      transform: translateX(4px);
-    }
-
-    .cert-dot {
-      width: 6px;
-      height: 6px;
-      background: var(--gold);
-      margin-top: 0.5rem;
-      flex-shrink: 0;
-      transform: rotate(45deg);
-    }
-
-    .cert-info {
-      flex: 1;
-    }
-
-    .cert-name {
-      font-size: 0.9rem;
-      color: var(--text);
-      margin-bottom: 0.3rem;
-      line-height: 1.4;
-    }
-
-    .cert-meta {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.62rem;
-      color: var(--text-dim);
-      letter-spacing: 0.06em;
-    }
-
-    .cert-arrow {
-      color: var(--gold);
-      font-size: 0.8rem;
-      opacity: 0;
-      transition: opacity 0.3s;
-      margin-top: 0.2rem;
-    }
-
-    .cert-item:hover .cert-arrow {
-      opacity: 1;
-    }
-
-    /* ─── CONTACT ─── */
-    #contact {
-      text-align: center;
-      padding: 8rem 4rem;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    .contact-eyebrow {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.7rem;
-      color: var(--gold);
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
-    }
-
-    .contact-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      font-weight: 300;
-      color: var(--white);
-      margin-bottom: 1.5rem;
-      line-height: 1.1;
-    }
-
-    .contact-desc {
-      color: var(--text-mid);
-      font-size: 1rem;
-      margin-bottom: 3rem;
-    }
-
-    .contact-links {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-bottom: 3rem;
-    }
-
-    .contact-item {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      padding: 0.8rem 1.5rem;
-      border: 1px solid var(--gold-border);
-      color: var(--text-mid);
-      text-decoration: none;
-      font-size: 0.85rem;
-      transition: all 0.3s;
-    }
-
-    .contact-item:hover {
-      border-color: var(--gold);
-      color: var(--gold);
-      background: var(--gold-dim);
-    }
-
-    /* ─── FOOTER ─── */
-    footer {
-      border-top: 1px solid rgba(255, 255, 255, 0.04);
-      padding: 2rem 4rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    footer p {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--text-dim);
-      letter-spacing: 0.08em;
-    }
-
-    footer .footer-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem;
-      color: var(--gold);
-      font-weight: 600;
-    }
-
-    /* ─── ANIMATIONS ─── */
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(24px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
-      }
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ─── MOBILE ─── */
-    @media (max-width: 768px) {
-      nav {
-        padding: 1.2rem 1.5rem;
-      }
-
-      nav ul {
-        display: none;
-      }
-
-      #hero {
-        padding: 0 1.5rem;
-      }
-
-      .hero-social {
-        display: none;
-      }
-
-      .hero-name {
-        font-size: 3rem;
-      }
-
-      section {
-        padding: 5rem 1.5rem;
-      }
-
-      #experience .inner,
-      #projects .inner,
-      #certifications .inner {
-        padding: 0 1.5rem;
-      }
-
-      .about-grid {
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
-      }
-
-      .projects-grid {
-        grid-template-columns: 1fr;
-      }
-
-      footer {
-        flex-direction: column;
-        gap: 1rem;
-        text-align: center;
-        padding: 1.5rem;
-      }
-    }
-
-    /* ─── SCROLLBAR ─── */
-    ::-webkit-scrollbar {
-      width: 4px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: var(--bg);
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: var(--gold-border);
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: var(--gold);
-    }
-  </style>
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
@@ -1013,22 +33,20 @@
   <section id="hero">
     <div class="hero-bg"></div>
     <div class="hero-line"></div>
-
     <div class="hero-content">
-      <p class="hero-tag">// Software Developer · Sevilla, España</p>
-      <h1 class="hero-name">Alejandro<br><span>Ramírez</span></h1>
-      <p class="hero-title">Backend Engineer & Cloud Architect</p>
-      <p class="hero-desc">
-        Desarrollador especializado en arquitecturas de microservicios, cloud computing y sistemas distribuidos.
-        Actualmente en ViewNext desarrollando frameworks en Java e integrando tecnologías como Kafka, Kubernetes y
-        OpenShift.
-      </p>
-      <div class="hero-ctas">
-        <a href="#projects" class="btn btn-gold">Ver proyectos</a>
-        <a href="#contact" class="btn btn-outline">Contactar</a>
-      </div>
+    <p class="hero-tag">// Software Developer · Sevilla, España</p>
+    <h1 class="hero-name">Alejandro<br><span>Ramírez</span></h1>
+    <p class="hero-title">Backend Engineer</p>
+    <p class="hero-desc">
+      Soy Alejandro Ramírez Luque, Desarrollador de Software especializado en Java y Spring Boot. Me dedico a construir
+      arquitecturas backend robustas y orientadas a microservicios, con un fuerte interés y aprendizaje continuo en
+      tecnologías Cloud y cultura DevOps.
+    </p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn btn-gold">Ver proyectos</a>
+      <a href="#contact" class="btn btn-outline">Contactar</a>
     </div>
-
+    </div>
     <div class="hero-social">
       <a href="https://github.com/aleramiirez" target="_blank" class="social-icon" title="GitHub">
         <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
@@ -1052,61 +70,46 @@
       <h2 class="section-title">Sobre mí</h2>
       <div class="section-line"></div>
     </div>
-
     <div class="about-grid">
       <div class="about-text reveal">
-        <p>
-          Soy un desarrollador de software con sede en Sevilla, apasionado por la creación de sistemas robustos y
-          escalables. Me especializo en el desarrollo backend con Java y el ecosistema Spring, la orquestación de
-          contenedores con Kubernetes y OpenShift, y la arquitectura de microservicios.
+        <p>Desde Sevilla, trabajo como Desarrollador de Software en Viewnext, aportando soluciones para la Gerencia
+          Informática de la Seguridad Social. Mi día a día se centra en el diseño y creación de microservicios dentro
+          del ecosistema Spring, integrando herramientas como Kafka, Infinispan Cache, bases de datos Oracle y MongoDB.
         </p>
-        <p>
-          Actualmente trabajo en ViewNext mientras curso simultáneamente el Grado en Ingeniería Informática de Software
-          en la Universidad de Sevilla, combinando la práctica profesional con la formación académica.
-        </p>
-        <p>
-          Me gusta explorar el cruce entre inteligencia artificial y desarrollo de aplicaciones, desde la integración de
-          APIs de IA generativa hasta el procesamiento de eventos en tiempo real con Apache Kafka.
-        </p>
+        <p>Mi base técnica proviene del Grado Superior en Desarrollo de Aplicaciones Multiplataforma (DAM) y, movido por
+          las ganas de seguir creciendo profesionalmente, actualmente compagino mi trabajo con el Grado en Ingeniería
+          Informática de Software en la Universidad de Sevilla.</p>
+        <p>Me apasiona crear sistemas escalables y eficientes. Aunque manejo habitualmente despliegues con Docker,
+          Kubernetes y OpenShift en mi entorno laboral, considero el mundo Cloud como mi principal área de formación
+          activa. Dedico parte de mi tiempo a explorar de forma autodidacta y certificarme en infraestructuras como
+          Helm, Azure, AWS y GCP, buscando siempre tener una visión mucho más completa y actualizada del ciclo de vida
+          del software.</p>
       </div>
-
       <div class="about-meta reveal">
         <div class="meta-item">
           <span class="meta-icon">📍</span>
-          <div>
-            <span class="meta-label">Ubicación</span>
-            <span class="meta-value">Sevilla, España</span>
-          </div>
+          <div><span class="meta-label">Ubicación</span><span class="meta-value">Sevilla, España</span></div>
         </div>
         <div class="meta-item">
           <span class="meta-icon">✉️</span>
           <div>
             <span class="meta-label">Email</span>
             <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#97;&#108;&#101;&#106;&#97;&#110;&#100;&#114;&#111;&#49;&#48;&#53;&#50;&#48;&#48;&#52;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;"
-              class="meta-value" style="color:inherit;text-decoration:none;">
-              alejandro1052004&#64;gmail&#46;com
-            </a>
+              class="meta-value" style="color:inherit;text-decoration:none;">alejandro1052004&#64;gmail&#46;com</a>
           </div>
         </div>
         <div class="meta-item">
           <span class="meta-icon">📱</span>
-          <div>
-            <span class="meta-label">Teléfono</span>
-            <span class="meta-value">685 81 79 45</span>
-          </div>
+          <div><span class="meta-label">Teléfono</span><span class="meta-value">685 81 79 45</span></div>
         </div>
         <div class="meta-item">
           <span class="meta-icon">🌍</span>
-          <div>
-            <span class="meta-label">Idiomas</span>
-            <span class="meta-value">Español (nativo) · Inglés B1 · Francés básico</span>
-          </div>
+          <div><span class="meta-label">Idiomas</span><span class="meta-value">Español (nativo) · Inglés B1 · Francés
+              básico</span></div>
         </div>
         <div class="meta-item">
           <span class="meta-icon">🎓</span>
-          <div>
-            <span class="meta-label">Estado</span>
-            <span class="meta-value">Estudiante & Profesional activo</span>
+          <div><span class="meta-label">Estado</span><span class="meta-value">Estudiante & Profesional activo</span>
           </div>
         </div>
       </div>
@@ -1121,66 +124,47 @@
         <h2 class="section-title">Experiencia</h2>
         <div class="section-line"></div>
       </div>
-
       <div class="exp-timeline">
         <div class="exp-item reveal">
           <div class="exp-dot"></div>
           <div class="exp-period">Agosto 2024 – Actualidad</div>
           <h3 class="exp-role">Software Developer</h3>
           <p class="exp-company"><span>ViewNext</span> · Sevilla, España</p>
-          <p class="exp-desc">
-            Desarrollo de framework y creación de microservicios en Java, implementando tecnologías como Kafka,
-            Infinispan Cache, Ickle Queries, SOAP, bases de datos Oracle y MongoDB, así como procesos Batch. Diseño y
-            desarrollo de un consumidor Kafka dentro del framework, encargado de recibir eventos con datos para lanzar
-            un CronJob en OpenShift, deteniendo el consumo mientras el CronJob se ejecuta y, una vez finalizado,
+          <p class="exp-desc">Desarrollo de framework y creación de microservicios en Java, implementando tecnologías
+            como Kafka, Infinispan Cache, Ickle Queries, SOAP, bases de datos Oracle y MongoDB, así como procesos Batch.
+            Diseño y desarrollo de un consumidor Kafka dentro del framework, encargado de recibir eventos con datos para
+            lanzar un CronJob en OpenShift, deteniendo el consumo mientras el CronJob se ejecuta y, una vez finalizado,
             enviando un evento a otro consumidor que notifica para reanudar el consumo. Trabajo con entornos
             Kubernetes/OpenShift, utilizando Helm para empaquetar y automatizar los despliegues, y realizando
-            configuraciones avanzadas mediante la personalización de manifiestos YAML.
-          </p>
+            configuraciones avanzadas mediante la personalización de manifiestos YAML.</p>
           <div class="exp-tags">
-            <span class="tag">Java</span>
-            <span class="tag">Kafka</span>
-            <span class="tag">OpenShift</span>
-            <span class="tag">Kubernetes</span>
-            <span class="tag">Helm</span>
-            <span class="tag">Oracle</span>
-            <span class="tag">MongoDB</span>
-            <span class="tag">Infinispan</span>
+            <span class="tag">Java</span><span class="tag">Kafka</span><span class="tag">OpenShift</span><span
+              class="tag">Kubernetes</span><span class="tag">Helm</span><span class="tag">Oracle</span><span
+              class="tag">MongoDB</span><span class="tag">Infinispan</span>
           </div>
         </div>
-
         <div class="exp-item reveal">
           <div class="exp-dot"></div>
           <div class="exp-period">Mayo 2024 – Julio 2025</div>
           <h3 class="exp-role">Director Adjunto</h3>
           <p class="exp-company"><span>118 Family Care</span> · Sevilla, España</p>
-          <p class="exp-desc">
-            Rol de gestión y coordinación en empresa del sector servicios, compatibilizado con la formación técnica.
-          </p>
+          <p class="exp-desc">Rol de gestión y coordinación en empresa del sector servicios, compatibilizado con la
+            formación técnica.</p>
           <div class="exp-tags">
-            <span class="tag">Gestión</span>
-            <span class="tag">Liderazgo</span>
-            <span class="tag">Coordinación</span>
+            <span class="tag">Gestión</span><span class="tag">Liderazgo</span><span class="tag">Coordinación</span>
           </div>
         </div>
-
         <div class="exp-item reveal">
           <div class="exp-dot"></div>
           <div class="exp-period">Abril – Junio 2024</div>
           <h3 class="exp-role">Prácticas Software Developer</h3>
           <p class="exp-company"><span>ViewNext</span> · Sevilla, España</p>
-          <p class="exp-desc">
-            Prácticas de formación en empresa tecnológica, desarrollo de aplicación de gestión genérica con arquitectura
-            de microservicios en Spring Boot y front en Node.js. Aplicación dockerizada y desplegada en Azure con
-            Kubernetes.
-          </p>
+          <p class="exp-desc">Prácticas de formación en empresa tecnológica, desarrollo de aplicación de gestión
+            genérica con arquitectura de microservicios en Spring Boot y front en Node.js. Aplicación dockerizada y
+            desplegada en Azure con Kubernetes.</p>
           <div class="exp-tags">
-            <span class="tag">Spring Boot</span>
-            <span class="tag">Node.js</span>
-            <span class="tag">Docker</span>
-            <span class="tag">Azure</span>
-            <span class="tag">Kubernetes</span>
-            <span class="tag">Jenkins</span>
+            <span class="tag">Spring Boot</span><span class="tag">Node.js</span><span class="tag">Docker</span><span
+              class="tag">Azure</span><span class="tag">Kubernetes</span><span class="tag">Jenkins</span>
           </div>
         </div>
       </div>
@@ -1194,104 +178,74 @@
       <h2 class="section-title">Stack técnico</h2>
       <div class="section-line"></div>
     </div>
-
     <div class="skills-grid">
       <div class="skill-card reveal">
         <div class="skill-icon">⚙️</div>
         <div class="skill-category">Lenguajes</div>
         <div class="skill-items">
-          <span class="skill-item">Java</span>
-          <span class="skill-item">Python</span>
-          <span class="skill-item">C#</span>
-          <span class="skill-item">Dart</span>
-          <span class="skill-item">JavaScript</span>
-          <span class="skill-item">HTML/CSS</span>
+          <span class="skill-item">Java</span><span class="skill-item">Python</span><span
+            class="skill-item">C#</span><span class="skill-item">Dart</span><span
+            class="skill-item">JavaScript</span><span class="skill-item">HTML/CSS</span>
         </div>
       </div>
-
       <div class="skill-card reveal">
         <div class="skill-icon">🔧</div>
         <div class="skill-category">Backend & Frameworks</div>
         <div class="skill-items">
-          <span class="skill-item">Spring Boot</span>
-          <span class="skill-item">Spring Cloud</span>
-          <span class="skill-item">Spring Security</span>
-          <span class="skill-item">Spring Batch</span>
-          <span class="skill-item">Node.js</span>
-          <span class="skill-item">.NET</span>
-          <span class="skill-item">SOAP</span>
+          <span class="skill-item">Spring Boot</span><span class="skill-item">Spring Cloud</span><span
+            class="skill-item">Spring Security</span><span class="skill-item">Spring Batch</span><span
+            class="skill-item">Node.js</span><span class="skill-item">.NET</span><span class="skill-item">SOAP</span>
         </div>
       </div>
-
       <div class="skill-card reveal">
         <div class="skill-icon">📡</div>
         <div class="skill-category">Mensajería & Eventos</div>
         <div class="skill-items">
-          <span class="skill-item">Apache Kafka</span>
-          <span class="skill-item">Kafka Connect</span>
-          <span class="skill-item">RabbitMQ</span>
-          <span class="skill-item">Infinispan Cache</span>
+          <span class="skill-item">Apache Kafka</span><span class="skill-item">Kafka Connect</span><span
+            class="skill-item">RabbitMQ</span><span class="skill-item">Infinispan Cache</span>
         </div>
       </div>
-
       <div class="skill-card reveal">
         <div class="skill-icon">🗄️</div>
         <div class="skill-category">Bases de Datos</div>
         <div class="skill-items">
-          <span class="skill-item">Oracle</span>
-          <span class="skill-item">SQL Server</span>
-          <span class="skill-item">MySQL</span>
-          <span class="skill-item">MongoDB</span>
+          <span class="skill-item">Oracle</span><span class="skill-item">SQL Server</span><span
+            class="skill-item">MySQL</span><span class="skill-item">MongoDB</span>
         </div>
       </div>
-
       <div class="skill-card reveal">
         <div class="skill-icon">☁️</div>
         <div class="skill-category">DevOps & Cloud</div>
         <div class="skill-items">
-          <span class="skill-item">Docker</span>
-          <span class="skill-item">Kubernetes</span>
-          <span class="skill-item">OpenShift</span>
-          <span class="skill-item">Helm</span>
-          <span class="skill-item">Azure</span>
-          <span class="skill-item">GCP</span>
-          <span class="skill-item">Terraform</span>
-          <span class="skill-item">Jenkins</span>
-          <span class="skill-item">GitHub Actions</span>
+          <span class="skill-item">Docker</span><span class="skill-item">Kubernetes</span><span
+            class="skill-item">OpenShift</span><span class="skill-item">Helm</span><span
+            class="skill-item">Azure</span><span class="skill-item">GCP</span><span
+            class="skill-item">Terraform</span><span class="skill-item">Jenkins</span><span class="skill-item">GitHub
+            Actions</span>
         </div>
       </div>
-
       <div class="skill-card reveal">
         <div class="skill-icon">📱</div>
         <div class="skill-category">Frontend & Mobile</div>
         <div class="skill-items">
-          <span class="skill-item">Flutter</span>
-          <span class="skill-item">EJS</span>
-          <span class="skill-item">Unity</span>
-          <span class="skill-item">Android Studio</span>
+          <span class="skill-item">Flutter</span><span class="skill-item">EJS</span><span
+            class="skill-item">Unity</span><span class="skill-item">Android Studio</span>
         </div>
       </div>
-
       <div class="skill-card reveal">
         <div class="skill-icon">🤖</div>
         <div class="skill-category">IA & Nuevas tecnologías</div>
         <div class="skill-items">
-          <span class="skill-item">IA Generativa</span>
-          <span class="skill-item">AI Integration</span>
-          <span class="skill-item">Cloud Functions</span>
-          <span class="skill-item">API externas IA</span>
+          <span class="skill-item">IA Generativa</span><span class="skill-item">AI Integration</span><span
+            class="skill-item">Cloud Functions</span><span class="skill-item">API externas IA</span>
         </div>
       </div>
-
       <div class="skill-card reveal">
         <div class="skill-icon">🛠️</div>
         <div class="skill-category">Herramientas</div>
         <div class="skill-items">
-          <span class="skill-item">Git</span>
-          <span class="skill-item">IntelliJ</span>
-          <span class="skill-item">VS Code</span>
-          <span class="skill-item">Scrum / Agile</span>
-          <span class="skill-item">Notion</span>
+          <span class="skill-item">Git</span><span class="skill-item">IntelliJ</span><span class="skill-item">VS
+            Code</span><span class="skill-item">Scrum / Agile</span><span class="skill-item">Notion</span>
         </div>
       </div>
     </div>
@@ -1307,87 +261,394 @@
       </div>
 
       <div class="projects-grid">
+
         <!-- Armario Virtual -->
-        <div class="project-card reveal">
-          <div class="project-num">Proyecto 01</div>
-          <h3 class="project-title">Armario Virtual</h3>
-          <p class="project-subtitle">Flutter · IA Generativa · Cloud</p>
-          <p class="project-desc">
-            Aplicación móvil inteligente desarrollada en Flutter que digitaliza tu vestuario personal. Utiliza
-            Inteligencia Artificial en la nube para categorizar prendas, detectar colores y sugerir productos similares.
-            Incluye eliminación de fondo con API externa vía Cloud Functions, etiquetado automático con auto-tagging,
-            probador virtual con interfaz drag & drop y buscador de productos similares en tiempo real. Las etiquetas
-            detectadas en inglés se traducen automáticamente al español.
-          </p>
-          <div class="project-techs">
-            <span class="project-tech">Flutter</span>
-            <span class="project-tech">Dart</span>
-            <span class="project-tech">Firebase</span>
-            <span class="project-tech">Cloud Functions</span>
-            <span class="project-tech">IA Generativa</span>
-            <span class="project-tech">APIs REST</span>
+        <div class="project-card reveal" onclick="openProject('armario')">
+          <div class="project-card-inner">
+            <div class="project-card-front">
+              <div class="project-num">Proyecto 01</div>
+              <div class="project-preview-icon">👔</div>
+              <h3 class="project-title">Armario Virtual</h3>
+              <p class="project-subtitle">Flutter · IA · GCP Serverless</p>
+              <p class="project-brief">App móvil que digitaliza tu vestuario personal con IA en la nube: categoriza
+                prendas automáticamente, detecta colores y sugiere productos similares en tiempo real.</p>
+              <div class="project-techs">
+                <span class="project-tech">Flutter</span>
+                <span class="project-tech">Cloud Functions</span>
+                <span class="project-tech">Vision API</span>
+                <span class="project-tech">Firebase</span>
+              </div>
+              <div class="project-cta">Ver proyecto <span>→</span></div>
+            </div>
+            <div class="project-card-back">
+              <div class="project-back-tag">Proyecto 01</div>
+              <h3 class="project-back-title">Armario Virtual</h3>
+              <div class="project-back-highlights">
+                <div class="highlight-item"><span class="hi-icon">🧠</span><span>Vision API + Translation API
+                    (EN→ES)</span></div>
+                <div class="highlight-item"><span class="hi-icon">☁️</span><span>Cloud Functions Python Gen 2
+                    (GCP)</span></div>
+                <div class="highlight-item"><span class="hi-icon">🛍️</span><span>Smart Shopping con Custom Search
+                    API</span></div>
+                <div class="highlight-item"><span class="hi-icon">👗</span><span>Probador virtual Drag & Drop</span>
+                </div>
+              </div>
+              <div class="project-back-cta">Abrir detalle</div>
+            </div>
           </div>
-          <a href="https://github.com/aleramiirez/Armario-Virtual" target="_blank" class="project-link">
-            Ver en GitHub →
-          </a>
         </div>
 
-        <!-- TFG Minijuegos -->
-        <div class="project-card reveal">
-          <div class="project-num">Proyecto 02</div>
-          <h3 class="project-title">Minigames Platform</h3>
-          <p class="project-subtitle">Unity · C# · Spring Boot · Azure · Kubernetes</p>
-          <p class="project-desc">
-            TFG del Grado Superior DAM. Plataforma de minijuegos con Unity + C# (Pong, Flappy Bird, Snowball War, Jimmy
-            vs Covid, Space Invaders, Foxy Bros). Los juegos se comunican con una API de microservicios: servicio de
-            login con RabbitMQ, servicio de operaciones de usuario, API Gateway en puerto 8080, manejo global de
-            excepciones y CI/CD con GitHub Actions. Infraestructura dockerizada y desplegada en Azure con Kubernetes y
-            SQL Server.
-          </p>
-          <div class="project-techs">
-            <span class="project-tech">Unity</span>
-            <span class="project-tech">C#</span>
-            <span class="project-tech">Spring Boot</span>
-            <span class="project-tech">RabbitMQ</span>
-            <span class="project-tech">Docker</span>
-            <span class="project-tech">Azure</span>
-            <span class="project-tech">Kubernetes</span>
-            <span class="project-tech">GitHub Actions</span>
-          </div>
-          <div style="display:flex; gap:1rem; flex-wrap:wrap;">
-            <a href="https://github.com/aleramiirez/Minigames-Api" target="_blank" class="project-link">API →</a>
-            <a href="https://github.com/aleramiirez/Minigames" target="_blank" class="project-link">Game →</a>
+        <!-- Minigames -->
+        <div class="project-card reveal" onclick="openProject('minigames')">
+          <div class="project-card-inner">
+            <div class="project-card-front">
+              <div class="project-num">Proyecto 02</div>
+              <div class="project-preview-icon">🎮</div>
+              <h3 class="project-title">Minigames Platform</h3>
+              <p class="project-subtitle">Unity · C# · Spring Boot · Azure · K8s</p>
+              <p class="project-brief">Plataforma de entretenimiento completa: cliente Unity con 6 juegos y backend de
+                microservicios para autenticación, progresión y auditoría de jugadores.</p>
+              <div class="project-techs">
+                <span class="project-tech">Unity / C#</span>
+                <span class="project-tech">Spring Boot</span>
+                <span class="project-tech">RabbitMQ</span>
+                <span class="project-tech">Kubernetes</span>
+              </div>
+              <div class="project-cta">Ver proyecto <span>→</span></div>
+            </div>
+            <div class="project-card-back">
+              <div class="project-back-tag">Proyecto 02</div>
+              <h3 class="project-back-title">Minigames Platform</h3>
+              <div class="project-back-highlights">
+                <div class="highlight-item"><span class="hi-icon">🕹️</span><span>6 juegos: Pong, Flappy, Space
+                    Invaders...</span></div>
+                <div class="highlight-item"><span class="hi-icon">📡</span><span>Mensajería asíncrona con
+                    RabbitMQ</span></div>
+                <div class="highlight-item"><span class="hi-icon">⚙️</span><span>CI/CD automatizado con GitHub
+                    Actions</span></div>
+                <div class="highlight-item"><span class="hi-icon">☁️</span><span>Dockerizado y desplegado en Azure +
+                    K8s</span></div>
+              </div>
+              <div class="project-back-cta">Abrir detalle</div>
+            </div>
           </div>
         </div>
 
         <!-- Gestión Genérica -->
-        <div class="project-card reveal">
-          <div class="project-num">Proyecto 03</div>
-          <h3 class="project-title">Gestión Genérica</h3>
-          <p class="project-subtitle">Spring Boot · Microservicios · Azure · Kubernetes</p>
-          <p class="project-desc">
-            Proyecto de prácticas en ViewNext. Aplicación de gestión genérica con 6 microservicios: CRUD de usuario,
-            seguridad con Spring Security, auditoría vía RabbitMQ, excepciones personalizadas, discovery service con
-            Eureka y API Gateway. Front en Node.js. Dockerizado y desplegado en Azure con Kubernetes. Despliegue
-            automatizado con Jenkins y GitHub Actions. Documentado con wikis en GitHub.
-          </p>
-          <div class="project-techs">
-            <span class="project-tech">Spring Boot</span>
-            <span class="project-tech">Spring Security</span>
-            <span class="project-tech">Eureka</span>
-            <span class="project-tech">RabbitMQ</span>
-            <span class="project-tech">Node.js</span>
-            <span class="project-tech">Jenkins</span>
-            <span class="project-tech">Azure</span>
-            <span class="project-tech">Kubernetes</span>
+        <div class="project-card reveal" onclick="openProject('gestion')">
+          <div class="project-card-inner">
+            <div class="project-card-front">
+              <div class="project-num">Proyecto 03</div>
+              <div class="project-preview-icon">⚙️</div>
+              <h3 class="project-title">Gestión Genérica</h3>
+              <p class="project-subtitle">Spring Boot · 6 Microservicios · Azure</p>
+              <p class="project-brief">Aplicación empresarial con ecosistema de 6 microservicios desacoplados,
+                comunicación asíncrona con RabbitMQ y CI/CD completo con Jenkins y GitHub Actions.</p>
+              <div class="project-techs">
+                <span class="project-tech">Spring Boot</span>
+                <span class="project-tech">Eureka</span>
+                <span class="project-tech">RabbitMQ</span>
+                <span class="project-tech">Jenkins</span>
+              </div>
+              <div class="project-cta">Ver proyecto <span>→</span></div>
+            </div>
+            <div class="project-card-back">
+              <div class="project-back-tag">Proyecto 03</div>
+              <h3 class="project-back-title">Gestión Genérica</h3>
+              <div class="project-back-highlights">
+                <div class="highlight-item"><span class="hi-icon">🔒</span><span>Spring Security + auditoría
+                    RabbitMQ</span></div>
+                <div class="highlight-item"><span class="hi-icon">🔀</span><span>Eureka Service Discovery + API
+                    Gateway</span></div>
+                <div class="highlight-item"><span class="hi-icon">🚀</span><span>CI/CD Jenkins + GitHub Actions</span>
+                </div>
+                <div class="highlight-item"><span class="hi-icon">📝</span><span>Documentado con wikis en GitHub</span>
+                </div>
+              </div>
+              <div class="project-back-cta">Abrir detalle</div>
+            </div>
           </div>
-          <a href="https://github.com/anavarroo/GestionGenericaP.git" target="_blank" class="project-link">
-            Ver en GitHub →
-          </a>
         </div>
+
       </div>
     </div>
   </section>
+
+  <!-- PROJECT OVERLAY -->
+  <div id="project-overlay" onclick="closeProject()"></div>
+
+  <!-- MODAL: Armario Virtual -->
+  <div class="project-modal" id="modal-armario">
+    <button class="modal-close" onclick="closeProject()">✕</button>
+    <div class="modal-scroll">
+      <div class="modal-hero">
+        <span class="modal-icon">👔</span>
+        <div>
+          <div class="modal-tag">Proyecto 01 · Flutter · GCP · Firebase · Serverless</div>
+          <h2 class="modal-title">Armario Virtual</h2>
+          <p class="modal-subtitle">App móvil con motor de IA en la nube para gestión inteligente del vestuario personal
+          </p>
+        </div>
+      </div>
+      <div class="modal-links">
+        <a href="https://github.com/aleramiirez/Armario-Virtual" target="_blank" class="modal-link-btn">🐙 GitHub</a>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <h3>¿Qué es?</h3>
+          <p>Armario Virtual va más allá del simple almacenamiento de imágenes. Integra un motor de Inteligencia
+            Artificial en la nube para analizar, categorizar y recomendar prendas automáticamente. El procesamiento de
+            imágenes usa <strong>Dart Isolates</strong> para no bloquear la interfaz, garantizando una experiencia
+            completamente fluida mientras la IA trabaja en segundo plano.</p>
+        </div>
+        <div class="modal-section">
+          <h3>Funcionalidades principales</h3>
+          <div class="modal-features">
+            <div class="modal-feature">
+              <div class="mf-icon">🧥</div>
+              <div>
+                <strong>Gestión de Inventario con IA</strong>
+                <p>Subida de fotos con recorte automático de bordes transparentes y optimización de imagen. API externa
+                  integrada para eliminación de fondos dejando las prendas limpias visualmente.</p>
+              </div>
+            </div>
+            <div class="modal-feature">
+              <div class="mf-icon">🏷️</div>
+              <div>
+                <strong>Auto-Tagging automático</strong>
+                <p>Identifica el tipo de prenda ("Camiseta", "Vaqueros") y sus colores predominantes en RGB de forma
+                  automática. Confianza mínima del 70% garantizada por Vision API.</p>
+              </div>
+            </div>
+            <div class="modal-feature">
+              <div class="mf-icon">🛍️</div>
+              <div>
+                <strong>Smart Shopping visual</strong>
+                <p>Usa los tags generados por la IA para buscar y sugerir productos similares en la web en tiempo real
+                  mediante Google Custom Search API.</p>
+              </div>
+            </div>
+            <div class="modal-feature">
+              <div class="mf-icon">🌐</div>
+              <div>
+                <strong>Traducción automática</strong>
+                <p>Traduce las etiquetas detectadas del inglés al español con Translation API, filtrando términos
+                  irrelevantes como "textil" o "producto" mediante lista de exclusión personalizada.</p>
+              </div>
+            </div>
+            <div class="modal-feature">
+              <div class="mf-icon">👗</div>
+              <div>
+                <strong>Probador Virtual (Fitting Room)</strong>
+                <p>Interfaz Drag & Drop para componer outfits combinando parte superior, inferior y calzado. Validación
+                  de categorías esenciales antes de guardar.</p>
+              </div>
+            </div>
+            <div class="modal-feature">
+              <div class="mf-icon">🔐</div>
+              <div>
+                <strong>Seguridad avanzada</strong>
+                <p>Firebase Auth con Google Sign-In, Firebase App Check con Play Integrity contra tráfico abusivo y
+                  Secret Manager en GCP para gestión segura de claves API.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-section">
+          <h3>Arquitectura Cloud — GCP (europe-west1)</h3>
+          <div class="modal-arch">
+            <div class="arch-item"><span class="arch-label">Cloud Functions (Python Gen 2)</span><span
+                class="arch-desc">Backend serverless — lógica de IA completamente desacoplada del cliente</span></div>
+            <div class="arch-item"><span class="arch-label">Vision API</span><span class="arch-desc">Etiquetado
+                automático con confianza &gt;70% y extracción de colores RGB dominantes</span></div>
+            <div class="arch-item"><span class="arch-label">Translation API</span><span class="arch-desc">Traducción
+                EN→ES con filtro de exclusión personalizado por dominio</span></div>
+            <div class="arch-item"><span class="arch-label">Custom Search API</span><span class="arch-desc">Motor de
+                búsqueda visual por tags para recomendación de productos similares</span></div>
+            <div class="arch-item"><span class="arch-label">Cloud Firestore</span><span class="arch-desc">BD NoSQL
+                optimizada para lecturas en tiempo real por colección de usuario</span></div>
+            <div class="arch-item"><span class="arch-label">Cloud Storage</span><span class="arch-desc">Almacenamiento
+                multimedia por usuario: garment_images/{userId}/</span></div>
+            <div class="arch-item"><span class="arch-label">Firebase Auth + App Check</span><span
+                class="arch-desc">Autenticación con Google Sign-In y protección Play Integrity</span></div>
+            <div class="arch-item"><span class="arch-label">Secret Manager</span><span class="arch-desc">Gestión segura
+                de claves API sin exposición en código fuente</span></div>
+          </div>
+        </div>
+        <div class="modal-section">
+          <h3>Stack técnico</h3>
+          <div class="modal-stack">
+            <span class="modal-tech">Flutter / Dart</span>
+            <span class="modal-tech">Python 3.11</span>
+            <span class="modal-tech">GCP</span>
+            <span class="modal-tech">Firebase</span>
+            <span class="modal-tech">Cloud Functions</span>
+            <span class="modal-tech">Vision API</span>
+            <span class="modal-tech">Translation API</span>
+            <span class="modal-tech">Custom Search API</span>
+            <span class="modal-tech">Firestore</span>
+            <span class="modal-tech">Cloud Storage</span>
+            <span class="modal-tech">Dart Isolates</span>
+            <span class="modal-tech">Secret Manager</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Minigames -->
+  <div class="project-modal" id="modal-minigames">
+    <button class="modal-close" onclick="closeProject()">✕</button>
+    <div class="modal-scroll">
+      <div class="modal-hero">
+        <span class="modal-icon">🎮</span>
+        <div>
+          <div class="modal-tag">Proyecto 02 · Unity · C# · Spring Boot · Azure · Kubernetes</div>
+          <h2 class="modal-title">Minigames Platform</h2>
+          <p class="modal-subtitle">Plataforma de entretenimiento completa: cliente Unity con 6 juegos y backend de
+            microservicios</p>
+        </div>
+      </div>
+      <div class="modal-links">
+        <a href="https://github.com/aleramiirez/Minigames-Api" target="_blank" class="modal-link-btn">🐙 API Repo</a>
+        <a href="https://github.com/aleramiirez/Minigames" target="_blank" class="modal-link-btn">🎮 Game Repo</a>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <h3>¿Qué es?</h3>
+          <p>Plataforma de entretenimiento completa compuesta por un cliente desarrollado en Unity con menú principal
+            interactivo (configuración de volumen, pantalla completa y calidad gráfica) y una robusta arquitectura
+            backend de microservicios para gestión integral de jugadores, autenticación y auditoría. Desarrollado como
+            TFG del Grado Superior DAM.</p>
+        </div>
+        <div class="modal-section">
+          <h3>Catálogo de juegos</h3>
+          <div class="modal-games">
+            <span class="game-chip">🏓 Pong Glow — mejor de 3</span>
+            <span class="game-chip">🐦 Flappy Bird — supervivencia</span>
+            <span class="game-chip">⛄ Snowball War — multijugador local</span>
+            <span class="game-chip">🦠 Jimmy vs Covid — esquiva obstáculos</span>
+            <span class="game-chip">🚀 Space Invaders — con jefe final</span>
+            <span class="game-chip">🦊 Foxy Bros — plataformas tipo Mario</span>
+          </div>
+        </div>
+        <div class="modal-section">
+          <h3>Arquitectura de microservicios (Backend)</h3>
+          <div class="modal-arch">
+            <div class="arch-item"><span class="arch-label">API Gateway (puerto 8080)</span><span
+                class="arch-desc">Punto de entrada unificado para todas las peticiones HTTP con enrutamiento
+                dinámico</span></div>
+            <div class="arch-item"><span class="arch-label">Auth Service</span><span class="arch-desc">Registro y
+                autenticación de usuarios — comunica eventos vía RabbitMQ al servicio de auditoría</span></div>
+            <div class="arch-item"><span class="arch-label">User Operations Service</span><span
+                class="arch-desc">Búsqueda de jugadores por username y progresión de nivel</span></div>
+            <div class="arch-item"><span class="arch-label">Audit Service</span><span class="arch-desc">Registro
+                asíncrono de eventos de registro y login recibidos por RabbitMQ</span></div>
+            <div class="arch-item"><span class="arch-label">Exception Handler</span><span class="arch-desc">Controlador
+                global de excepciones con respuestas HTTP estandarizadas</span></div>
+          </div>
+        </div>
+        <div class="modal-section">
+          <h3>Infraestructura & DevOps</h3>
+          <p>Infraestructura completamente dockerizada y desplegada en <strong>Azure con Kubernetes</strong>. Pipeline
+            CI/CD automatizado con <strong>GitHub Actions</strong>: flujos de limpieza, instalación y publicación de
+            imágenes Docker en Docker Hub. Base de datos <strong>SQL Server</strong> con dos schemas segregados: uno
+            para usuarios y otro para auditoría.</p>
+        </div>
+        <div class="modal-section">
+          <h3>Stack técnico</h3>
+          <div class="modal-stack">
+            <span class="modal-tech">Unity</span>
+            <span class="modal-tech">C#</span>
+            <span class="modal-tech">Java Spring Boot</span>
+            <span class="modal-tech">Spring Cloud</span>
+            <span class="modal-tech">RabbitMQ</span>
+            <span class="modal-tech">SQL Server</span>
+            <span class="modal-tech">Docker</span>
+            <span class="modal-tech">Kubernetes</span>
+            <span class="modal-tech">Azure</span>
+            <span class="modal-tech">GitHub Actions</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Gestión Genérica -->
+  <div class="project-modal" id="modal-gestion">
+    <button class="modal-close" onclick="closeProject()">✕</button>
+    <div class="modal-scroll">
+      <div class="modal-hero">
+        <span class="modal-icon">⚙️</span>
+        <div>
+          <div class="modal-tag">Proyecto 03 · Spring Boot · Node.js · Azure · Kubernetes</div>
+          <h2 class="modal-title">Gestión Genérica</h2>
+          <p class="modal-subtitle">Prácticas ViewNext — Ecosistema de 6 microservicios con CI/CD completo y despliegue
+            en Azure</p>
+        </div>
+      </div>
+      <div class="modal-links">
+        <a href="https://github.com/anavarroo/GestionGenericaP" target="_blank" class="modal-link-btn">🐙 GitHub</a>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <h3>¿Qué es?</h3>
+          <p>Aplicación empresarial diseñada para gestionar operaciones genéricas, construida íntegramente bajo un
+            paradigma de microservicios altamente escalable. Backend en Java Spring Boot y frontend en Node.js, con un
+            entorno de despliegue continuo completamente automatizado. Desarrollada durante las prácticas en
+            <strong>ViewNext</strong>.
+          </p>
+        </div>
+        <div class="modal-section">
+          <h3>Ecosistema de 6 microservicios</h3>
+          <div class="modal-arch">
+            <div class="arch-item"><span class="arch-label">API Gateway</span><span class="arch-desc">Enrutamiento
+                dinámico de todas las peticiones al microservicio correspondiente</span></div>
+            <div class="arch-item"><span class="arch-label">User CRUD</span><span class="arch-desc">Operaciones
+                completas de creación, lectura, actualización y eliminación de usuarios</span></div>
+            <div class="arch-item"><span class="arch-label">Security Service</span><span
+                class="arch-desc">Implementación de Spring Security para autenticación y autorización
+                centralizada</span></div>
+            <div class="arch-item"><span class="arch-label">Audit Service</span><span class="arch-desc">Trazabilidad de
+                registros y accesos recibidos de forma asíncrona vía RabbitMQ</span></div>
+            <div class="arch-item"><span class="arch-label">Exception Service</span><span class="arch-desc">Manejo
+                centralizado de excepciones personalizadas con respuestas HTTP estandarizadas</span></div>
+            <div class="arch-item"><span class="arch-label">Discovery Service (Eureka)</span><span
+                class="arch-desc">Service discovery para balanceo de carga interno entre microservicios</span></div>
+          </div>
+        </div>
+        <div class="modal-section">
+          <h3>Comunicación asíncrona</h3>
+          <p>Implementación de <strong>RabbitMQ</strong> como broker de mensajería para el envío de datos de registro y
+            login hacia el servicio de auditoría. Esta arquitectura evita cuellos de botella en la autenticación y
+            garantiza la trazabilidad sin penalizar el rendimiento de los servicios principales.</p>
+        </div>
+        <div class="modal-section">
+          <h3>Infraestructura & DevOps</h3>
+          <p>Entorno completamente dockerizado y desplegado en <strong>Azure con Kubernetes</strong>. El ciclo de vida
+            del software está automatizado con pipelines de <strong>Jenkins</strong> y <strong>GitHub Actions</strong>
+            para integración y despliegue continuo (CI/CD). El proyecto está respaldado con documentación funcional
+            completa en wikis de GitHub.</p>
+        </div>
+        <div class="modal-section">
+          <h3>Stack técnico</h3>
+          <div class="modal-stack">
+            <span class="modal-tech">Java Spring Boot</span>
+            <span class="modal-tech">Spring Security</span>
+            <span class="modal-tech">Spring Cloud</span>
+            <span class="modal-tech">Eureka</span>
+            <span class="modal-tech">RabbitMQ</span>
+            <span class="modal-tech">Node.js</span>
+            <span class="modal-tech">Docker</span>
+            <span class="modal-tech">Kubernetes</span>
+            <span class="modal-tech">Azure</span>
+            <span class="modal-tech">Jenkins</span>
+            <span class="modal-tech">GitHub Actions</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- EDUCATION -->
   <section id="education">
@@ -1396,7 +657,6 @@
       <h2 class="section-title">Formación</h2>
       <div class="section-line"></div>
     </div>
-
     <div class="edu-grid">
       <div class="edu-card reveal">
         <div class="edu-year">Septiembre 2024 – Actualidad</div>
@@ -1404,14 +664,12 @@
         <p class="edu-institution">Universidad de Sevilla</p>
         <p class="edu-location">📍 Sevilla, España</p>
       </div>
-
       <div class="edu-card reveal">
         <div class="edu-year">2022 – 2024</div>
         <h3 class="edu-degree">Técnico Superior en Desarrollo de Aplicaciones Multiplataforma (DAM)</h3>
         <p class="edu-institution">C.D.P. Santa Joaquina de Vedruna</p>
         <p class="edu-location">📍 Sevilla, España</p>
       </div>
-
       <div class="edu-card reveal">
         <div class="edu-year">2020 – 2022</div>
         <h3 class="edu-degree">Título Bachillerato Tecnológico</h3>
@@ -1429,7 +687,6 @@
         <h2 class="section-title">Cursos & Certificaciones</h2>
         <div class="section-line"></div>
       </div>
-
       <div style="margin-top:1rem;">
         <div class="cert-category-title reveal" style="margin-top:0;">Cloud, DevOps & Infraestructura</div>
         <div class="certs-grid">
@@ -1461,7 +718,6 @@
             <div class="cert-arrow">↗</div>
           </a>
         </div>
-
         <div class="cert-category-title reveal">Desarrollo Backend & Arquitectura</div>
         <div class="certs-grid">
           <a href="https://www.udemy.com/certificate/UC-901431d6-349c-4612-92fd-b813bf4be329/" target="_blank"
@@ -1492,7 +748,6 @@
             <div class="cert-arrow">↗</div>
           </a>
         </div>
-
         <div class="cert-category-title reveal">Metodologías Ágiles & Herramientas</div>
         <div class="certs-grid">
           <div class="cert-item reveal">
@@ -1521,21 +776,14 @@
     <div class="contact-eyebrow reveal">¿Hablamos?</div>
     <h2 class="contact-title reveal">Trabajemos<br><em style="color:var(--gold)">juntos</em></h2>
     <p class="contact-desc reveal">Abierto a nuevas oportunidades, colaboraciones y proyectos interesantes.</p>
-
     <div class="contact-links reveal">
       <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#97;&#108;&#101;&#106;&#97;&#110;&#100;&#114;&#111;&#49;&#48;&#53;&#50;&#48;&#48;&#52;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;"
         class="contact-item">
         ✉️ alejandro1052004&#64;gmail&#46;com
       </a>
-      <a href="tel:+34685817945" class="contact-item">
-        📱 685 81 79 45
-      </a>
-      <a href="http://www.linkedin.com/in/alejandro-ramirez-luque" target="_blank" class="contact-item">
-        💼 LinkedIn
-      </a>
-      <a href="https://github.com/aleramiirez" target="_blank" class="contact-item">
-        🐙 GitHub
-      </a>
+      <a href="tel:+34685817945" class="contact-item">📱 685 81 79 45</a>
+      <a href="http://www.linkedin.com/in/alejandro-ramirez-luque" target="_blank" class="contact-item">💼 LinkedIn</a>
+      <a href="https://github.com/aleramiirez" target="_blank" class="contact-item">🐙 GitHub</a>
     </div>
   </section>
 
