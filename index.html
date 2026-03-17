@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alejandro Ramírez — Software Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #0f0f18;
+    --bg3: #13131f;
+    --card: #111120;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --gold-dim: rgba(201,168,76,0.15);
+    --gold-border: rgba(201,168,76,0.25);
+    --text: #e8e4da;
+    --text-dim: #8a8474;
+    --text-mid: #b8b0a0;
+    --accent: #4c7ac9;
+    --accent2: #c94c7a;
+    --white: #f5f2ed;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ─── NOISE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.4;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 4rem;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(201,168,76,0.08);
+    transition: all 0.3s ease;
+  }
+
+  nav .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    text-decoration: none;
+  }
+
+  nav ul {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  nav ul a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+    font-weight: 400;
+  }
+
+  nav ul a:hover { color: var(--gold); }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 0 4rem;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 70% 50%, rgba(76,122,201,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(201,168,76,0.04) 0%, transparent 50%);
+  }
+
+  .hero-line {
+    position: absolute;
+    top: 0;
+    right: 30%;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, var(--gold-border), transparent);
+    opacity: 0.4;
+  }
+
+  .hero-content {
+    position: relative;
+    max-width: 700px;
+  }
+
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 7vw, 6rem);
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    margin-bottom: 0.2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.35s forwards;
+  }
+
+  .hero-name span {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 300;
+    color: var(--text-dim);
+    margin-bottom: 2rem;
+    font-style: italic;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.5s forwards;
+  }
+
+  .hero-desc {
+    font-size: 1rem;
+    color: var(--text-mid);
+    max-width: 520px;
+    line-height: 1.8;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.65s forwards;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 2rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s;
+    cursor: pointer;
+    border: none;
+    font-family: 'Outfit', sans-serif;
+  }
+
+  .btn-gold {
+    background: var(--gold);
+    color: #0a0a0f;
+  }
+  .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.3); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold-border);
+  }
+  .btn-outline:hover { background: var(--gold-dim); border-color: var(--gold); }
+
+  .hero-social {
+    position: absolute;
+    right: 4rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+    opacity: 0;
+    animation: fadeIn 1s 1s forwards;
+  }
+
+  .hero-social::before, .hero-social::after {
+    content: '';
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, transparent, var(--gold-border));
+  }
+  .hero-social::after { background: linear-gradient(to top, transparent, var(--gold-border)); }
+
+  .social-icon {
+    width: 38px;
+    height: 38px;
+    border: 1px solid var(--gold-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: all 0.3s;
+  }
+
+  .social-icon:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
+
+  /* ─── SECTIONS ─── */
+  section {
+    padding: 7rem 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+  }
+
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    opacity: 0.7;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 300;
+    color: var(--white);
+    letter-spacing: -0.01em;
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--gold-border), transparent);
+  }
+
+  /* ─── ABOUT ─── */
+  #about {
+    border-top: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    color: var(--text-mid);
+    font-size: 1.05rem;
+    line-height: 1.9;
+    margin-bottom: 1.5rem;
+  }
+
+  .about-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.2rem;
+    border: 1px solid var(--gold-border);
+    background: var(--card);
+    transition: all 0.3s;
+  }
+
+  .meta-item:hover { border-color: var(--gold); background: rgba(201,168,76,0.04); }
+
+  .meta-icon {
+    font-size: 1.1rem;
+    color: var(--gold);
+    width: 24px;
+    text-align: center;
+  }
+
+  .meta-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: block;
+  }
+
+  .meta-value {
+    font-size: 0.9rem;
+    color: var(--text);
+  }
+
+  /* ─── EXPERIENCE ─── */
+  #experience {
+    background: var(--bg2);
+    max-width: 100%;
+    padding: 7rem 0;
+  }
+
+  #experience .inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 4rem;
+  }
+
+  .exp-timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .exp-timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--gold-border), rgba(201,168,76,0.05));
+  }
+
+  .exp-item {
+    position: relative;
+    padding: 2.5rem 0 2.5rem 3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .exp-item:last-child { border-bottom: none; }
+
+  .exp-dot {
+    position: absolute;
+    left: -0.45rem;
+    top: 2.8rem;
+    width: 9px;
+    height: 9px;
+    border: 1px solid var(--gold);
+    background: var(--bg2);
+    transform: rotate(45deg);
+    transition: background 0.3s;
+  }
+
+  .exp-item:hover .exp-dot { background: var(--gold); }
+
+  .exp-period {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.4rem;
+  }
+
+  .exp-role {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 0.2rem;
+  }
+
+  .exp-company {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+  }
+
+  .exp-company span {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .exp-desc {
+    color: var(--text-mid);
+    font-size: 0.95rem;
+    line-height: 1.85;
+    max-width: 680px;
+  }
+
+  .exp-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.2rem;
+  }
+
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    padding: 0.3rem 0.8rem;
+    border: 1px solid var(--gold-border);
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    background: var(--gold-dim);
+  }
+
+  /* ─── SKILLS ─── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .skill-card {
+    background: var(--card);
+    border: 1px solid rgba(255,255,255,0.06);
+    padding: 2rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skill-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(to right, var(--gold), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .skill-card:hover { border-color: var(--gold-border); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+  .skill-card:hover::before { opacity: 1; }
+
+  .skill-category {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+  }
+
+  .skill-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .skill-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .skill-item {
+    font-size: 0.8rem;
+    color: var(--text-mid);
+    background: rgba(255,255,255,0.04);
+    padding: 0.25rem 0.6rem;
+    border-radius: 0;
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: all 0.2s;
+  }
+
+  .skill-item:hover { color: var(--gold); border-color: var(--gold-border); background: var(--gold-dim); }
+
+  /* ─── PROJECTS ─── */
+  #projects {
+    background: var(--bg2);
+    max-width: 100%;
+    padding: 7rem 0;
+  }
+  #projects .inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 4rem;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+  }
+
+  .project-card {
+    background: var(--card);
+    border: 1px solid rgba(255,255,255,0.06);
+    padding: 2.5rem;
+    transition: all 0.4s;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(to right, var(--gold), var(--accent));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+
+  .project-card:hover { border-color: var(--gold-border); transform: translateY(-6px); box-shadow: 0 30px 80px rgba(0,0,0,0.4); }
+  .project-card:hover::after { transform: scaleX(1); }
+
+  .project-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--text-dim);
+    letter-spacing: 0.15em;
+    margin-bottom: 1.5rem;
+    opacity: 0.5;
+  }
+
+  .project-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+
+  .project-subtitle {
+    font-size: 0.78rem;
+    color: var(--gold);
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.08em;
+    margin-bottom: 1.2rem;
+  }
+
+  .project-desc {
+    color: var(--text-mid);
+    font-size: 0.9rem;
+    line-height: 1.85;
+    flex: 1;
+    margin-bottom: 1.5rem;
+  }
+
+  .project-techs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .project-tech {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--accent);
+    border: 1px solid rgba(76,122,201,0.25);
+    padding: 0.2rem 0.6rem;
+    background: rgba(76,122,201,0.06);
+  }
+
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: gap 0.3s;
+  }
+
+  .project-link:hover { gap: 0.8rem; }
+
+  /* ─── EDUCATION ─── */
+  .edu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .edu-card {
+    padding: 2rem;
+    border: 1px solid rgba(255,255,255,0.06);
+    background: var(--card);
+    position: relative;
+    transition: all 0.3s;
+  }
+
+  .edu-card:hover { border-color: var(--gold-border); }
+
+  .edu-year {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+    margin-bottom: 0.8rem;
+  }
+
+  .edu-degree {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    color: var(--white);
+    margin-bottom: 0.4rem;
+    line-height: 1.3;
+  }
+
+  .edu-institution {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    margin-bottom: 0.3rem;
+  }
+
+  .edu-location {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    opacity: 0.6;
+  }
+
+  /* ─── CERTIFICATIONS ─── */
+  #certifications {
+    background: var(--bg2);
+    max-width: 100%;
+    padding: 7rem 0;
+  }
+  #certifications .inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 4rem;
+  }
+
+  .certs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .cert-category-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    margin-top: 3rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--gold-border);
+  }
+
+  .cert-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1.2rem;
+    border: 1px solid rgba(255,255,255,0.05);
+    background: var(--card);
+    transition: all 0.3s;
+    text-decoration: none;
+    color: inherit;
+    align-items: flex-start;
+  }
+
+  .cert-item:hover { border-color: var(--gold-border); background: rgba(201,168,76,0.03); transform: translateX(4px); }
+
+  .cert-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
+    margin-top: 0.5rem;
+    flex-shrink: 0;
+    transform: rotate(45deg);
+  }
+
+  .cert-info { flex: 1; }
+
+  .cert-name {
+    font-size: 0.9rem;
+    color: var(--text);
+    margin-bottom: 0.3rem;
+    line-height: 1.4;
+  }
+
+  .cert-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+  }
+
+  .cert-arrow {
+    color: var(--gold);
+    font-size: 0.8rem;
+    opacity: 0;
+    transition: opacity 0.3s;
+    margin-top: 0.2rem;
+  }
+
+  .cert-item:hover .cert-arrow { opacity: 1; }
+
+  /* ─── CONTACT ─── */
+  #contact {
+    text-align: center;
+    padding: 8rem 4rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .contact-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 300;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+  }
+
+  .contact-desc {
+    color: var(--text-mid);
+    font-size: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.8rem 1.5rem;
+    border: 1px solid var(--gold-border);
+    color: var(--text-mid);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: all 0.3s;
+  }
+
+  .contact-item:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    border-top: 1px solid rgba(255,255,255,0.04);
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer p {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    letter-spacing: 0.08em;
+  }
+
+  footer .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── MOBILE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    nav ul { display: none; }
+    #hero { padding: 0 1.5rem; }
+    .hero-social { display: none; }
+    .hero-name { font-size: 3rem; }
+    section { padding: 5rem 1.5rem; }
+    #experience .inner, #projects .inner, #certifications .inner { padding: 0 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; padding: 1.5rem; }
+  }
+
+  /* ─── SCROLLBAR ─── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--gold-border); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="logo">AR</a>
+  <ul>
+    <li><a href="#about">Sobre mí</a></li>
+    <li><a href="#experience">Experiencia</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Proyectos</a></li>
+    <li><a href="#education">Educación</a></li>
+    <li><a href="#certifications">Cursos</a></li>
+    <li><a href="#contact">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-line"></div>
+
+  <div class="hero-content">
+    <p class="hero-tag">// Software Developer · Sevilla, España</p>
+    <h1 class="hero-name">Alejandro<br><span>Ramírez</span></h1>
+    <p class="hero-title">Backend Engineer & Cloud Architect</p>
+    <p class="hero-desc">
+      Desarrollador especializado en arquitecturas de microservicios, cloud computing y sistemas distribuidos. Actualmente en ViewNext desarrollando frameworks en Java e integrando tecnologías como Kafka, Kubernetes y OpenShift.
+    </p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn btn-gold">Ver proyectos</a>
+      <a href="#contact" class="btn btn-outline">Contactar</a>
+    </div>
+  </div>
+
+  <div class="hero-social">
+    <a href="https://github.com/aleramiirez" target="_blank" class="social-icon" title="GitHub">
+      <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+    </a>
+    <a href="http://www.linkedin.com/in/alejandro-ramirez-luque" target="_blank" class="social-icon" title="LinkedIn">
+      <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header reveal">
+    <span class="section-num">01</span>
+    <h2 class="section-title">Sobre mí</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>
+        Soy un desarrollador de software con sede en Sevilla, apasionado por la creación de sistemas robustos y escalables. Me especializo en el desarrollo backend con Java y el ecosistema Spring, la orquestación de contenedores con Kubernetes y OpenShift, y la arquitectura de microservicios.
+      </p>
+      <p>
+        Actualmente trabajo en ViewNext mientras curso simultáneamente el Grado en Ingeniería Informática de Software en la Universidad de Sevilla, combinando la práctica profesional con la formación académica.
+      </p>
+      <p>
+        Me gusta explorar el cruce entre inteligencia artificial y desarrollo de aplicaciones, desde la integración de APIs de IA generativa hasta el procesamiento de eventos en tiempo real con Apache Kafka.
+      </p>
+    </div>
+
+    <div class="about-meta reveal">
+      <div class="meta-item">
+        <span class="meta-icon">📍</span>
+        <div>
+          <span class="meta-label">Ubicación</span>
+          <span class="meta-value">Sevilla, España</span>
+        </div>
+      </div>
+      <div class="meta-item">
+        <span class="meta-icon">✉️</span>
+        <div>
+          <span class="meta-label">Email</span>
+          <span class="meta-value">alejandro1052004@gmail.com</span>
+        </div>
+      </div>
+      <div class="meta-item">
+        <span class="meta-icon">📱</span>
+        <div>
+          <span class="meta-label">Teléfono</span>
+          <span class="meta-value">685 81 79 45</span>
+        </div>
+      </div>
+      <div class="meta-item">
+        <span class="meta-icon">🌍</span>
+        <div>
+          <span class="meta-label">Idiomas</span>
+          <span class="meta-value">Español (nativo) · Inglés B1 · Francés básico</span>
+        </div>
+      </div>
+      <div class="meta-item">
+        <span class="meta-icon">🎓</span>
+        <div>
+          <span class="meta-label">Estado</span>
+          <span class="meta-value">Estudiante & Profesional activo</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" style="padding:0">
+  <div class="inner" style="padding-top: 7rem; padding-bottom: 7rem;">
+    <div class="section-header reveal">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Experiencia</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="exp-timeline">
+      <div class="exp-item reveal">
+        <div class="exp-dot"></div>
+        <div class="exp-period">Agosto 2024 – Actualidad</div>
+        <h3 class="exp-role">Software Developer</h3>
+        <p class="exp-company"><span>ViewNext</span> · Sevilla, España</p>
+        <p class="exp-desc">
+          Desarrollo de framework y creación de microservicios en Java, implementando tecnologías como Kafka, Infinispan Cache, Ickle Queries, SOAP, bases de datos Oracle y MongoDB, así como procesos Batch. Diseño y desarrollo de un consumidor Kafka dentro del framework, encargado de recibir eventos con datos para lanzar un CronJob en OpenShift, deteniendo el consumo mientras el CronJob se ejecuta y, una vez finalizado, enviando un evento a otro consumidor que notifica para reanudar el consumo. Trabajo con entornos Kubernetes/OpenShift, utilizando Helm para empaquetar y automatizar los despliegues, y realizando configuraciones avanzadas mediante la personalización de manifiestos YAML.
+        </p>
+        <div class="exp-tags">
+          <span class="tag">Java</span>
+          <span class="tag">Kafka</span>
+          <span class="tag">OpenShift</span>
+          <span class="tag">Kubernetes</span>
+          <span class="tag">Helm</span>
+          <span class="tag">Oracle</span>
+          <span class="tag">MongoDB</span>
+          <span class="tag">Infinispan</span>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-dot"></div>
+        <div class="exp-period">Mayo 2024 – Julio 2025</div>
+        <h3 class="exp-role">Director Adjunto</h3>
+        <p class="exp-company"><span>118 Family Care</span> · Sevilla, España</p>
+        <p class="exp-desc">
+          Rol de gestión y coordinación en empresa del sector servicios, compatibilizado con la formación técnica.
+        </p>
+        <div class="exp-tags">
+          <span class="tag">Gestión</span>
+          <span class="tag">Liderazgo</span>
+          <span class="tag">Coordinación</span>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-dot"></div>
+        <div class="exp-period">Abril – Junio 2024</div>
+        <h3 class="exp-role">Prácticas Software Developer</h3>
+        <p class="exp-company"><span>ViewNext</span> · Sevilla, España</p>
+        <p class="exp-desc">
+          Prácticas de formación en empresa tecnológica, desarrollo de aplicación de gestión genérica con arquitectura de microservicios en Spring Boot y front en Node.js. Aplicación dockerizada y desplegada en Azure con Kubernetes.
+        </p>
+        <div class="exp-tags">
+          <span class="tag">Spring Boot</span>
+          <span class="tag">Node.js</span>
+          <span class="tag">Docker</span>
+          <span class="tag">Azure</span>
+          <span class="tag">Kubernetes</span>
+          <span class="tag">Jenkins</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header reveal">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Stack técnico</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="skills-grid">
+    <div class="skill-card reveal">
+      <div class="skill-icon">⚙️</div>
+      <div class="skill-category">Lenguajes</div>
+      <div class="skill-items">
+        <span class="skill-item">Java</span>
+        <span class="skill-item">Python</span>
+        <span class="skill-item">C#</span>
+        <span class="skill-item">Dart</span>
+        <span class="skill-item">JavaScript</span>
+        <span class="skill-item">HTML/CSS</span>
+      </div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">🔧</div>
+      <div class="skill-category">Backend & Frameworks</div>
+      <div class="skill-items">
+        <span class="skill-item">Spring Boot</span>
+        <span class="skill-item">Spring Cloud</span>
+        <span class="skill-item">Spring Security</span>
+        <span class="skill-item">Spring Batch</span>
+        <span class="skill-item">Node.js</span>
+        <span class="skill-item">.NET</span>
+        <span class="skill-item">SOAP</span>
+      </div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">📡</div>
+      <div class="skill-category">Mensajería & Eventos</div>
+      <div class="skill-items">
+        <span class="skill-item">Apache Kafka</span>
+        <span class="skill-item">Kafka Connect</span>
+        <span class="skill-item">RabbitMQ</span>
+        <span class="skill-item">Infinispan Cache</span>
+      </div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">🗄️</div>
+      <div class="skill-category">Bases de Datos</div>
+      <div class="skill-items">
+        <span class="skill-item">Oracle</span>
+        <span class="skill-item">SQL Server</span>
+        <span class="skill-item">MySQL</span>
+        <span class="skill-item">MongoDB</span>
+      </div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">☁️</div>
+      <div class="skill-category">DevOps & Cloud</div>
+      <div class="skill-items">
+        <span class="skill-item">Docker</span>
+        <span class="skill-item">Kubernetes</span>
+        <span class="skill-item">OpenShift</span>
+        <span class="skill-item">Helm</span>
+        <span class="skill-item">Azure</span>
+        <span class="skill-item">GCP</span>
+        <span class="skill-item">Terraform</span>
+        <span class="skill-item">Jenkins</span>
+        <span class="skill-item">GitHub Actions</span>
+      </div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">📱</div>
+      <div class="skill-category">Frontend & Mobile</div>
+      <div class="skill-items">
+        <span class="skill-item">Flutter</span>
+        <span class="skill-item">EJS</span>
+        <span class="skill-item">Unity</span>
+        <span class="skill-item">Android Studio</span>
+      </div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">🤖</div>
+      <div class="skill-category">IA & Nuevas tecnologías</div>
+      <div class="skill-items">
+        <span class="skill-item">IA Generativa</span>
+        <span class="skill-item">AI Integration</span>
+        <span class="skill-item">Cloud Functions</span>
+        <span class="skill-item">API externas IA</span>
+      </div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">🛠️</div>
+      <div class="skill-category">Herramientas</div>
+      <div class="skill-items">
+        <span class="skill-item">Git</span>
+        <span class="skill-item">IntelliJ</span>
+        <span class="skill-item">VS Code</span>
+        <span class="skill-item">Scrum / Agile</span>
+        <span class="skill-item">Notion</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" style="padding:0">
+  <div class="inner" style="padding-top: 7rem; padding-bottom: 7rem;">
+    <div class="section-header reveal">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Proyectos</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="projects-grid">
+      <!-- Armario Virtual -->
+      <div class="project-card reveal">
+        <div class="project-num">Proyecto 01</div>
+        <h3 class="project-title">Armario Virtual</h3>
+        <p class="project-subtitle">Flutter · IA Generativa · Cloud</p>
+        <p class="project-desc">
+          Aplicación móvil inteligente desarrollada en Flutter que digitaliza tu vestuario personal. Utiliza Inteligencia Artificial en la nube para categorizar prendas, detectar colores y sugerir productos similares. Incluye eliminación de fondo con API externa vía Cloud Functions, etiquetado automático con auto-tagging, probador virtual con interfaz drag & drop y buscador de productos similares en tiempo real. Las etiquetas detectadas en inglés se traducen automáticamente al español.
+        </p>
+        <div class="project-techs">
+          <span class="project-tech">Flutter</span>
+          <span class="project-tech">Dart</span>
+          <span class="project-tech">Firebase</span>
+          <span class="project-tech">Cloud Functions</span>
+          <span class="project-tech">IA Generativa</span>
+          <span class="project-tech">APIs REST</span>
+        </div>
+        <a href="https://github.com/aleramiirez/Armario-Virtual" target="_blank" class="project-link">
+          Ver en GitHub →
+        </a>
+      </div>
+
+      <!-- TFG Minijuegos -->
+      <div class="project-card reveal">
+        <div class="project-num">Proyecto 02</div>
+        <h3 class="project-title">Minigames Platform</h3>
+        <p class="project-subtitle">Unity · C# · Spring Boot · Azure · Kubernetes</p>
+        <p class="project-desc">
+          TFG del Grado Superior DAM. Plataforma de minijuegos con Unity + C# (Pong, Flappy Bird, Snowball War, Jimmy vs Covid, Space Invaders, Foxy Bros). Los juegos se comunican con una API de microservicios: servicio de login con RabbitMQ, servicio de operaciones de usuario, API Gateway en puerto 8080, manejo global de excepciones y CI/CD con GitHub Actions. Infraestructura dockerizada y desplegada en Azure con Kubernetes y SQL Server.
+        </p>
+        <div class="project-techs">
+          <span class="project-tech">Unity</span>
+          <span class="project-tech">C#</span>
+          <span class="project-tech">Spring Boot</span>
+          <span class="project-tech">RabbitMQ</span>
+          <span class="project-tech">Docker</span>
+          <span class="project-tech">Azure</span>
+          <span class="project-tech">Kubernetes</span>
+          <span class="project-tech">GitHub Actions</span>
+        </div>
+        <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+          <a href="https://github.com/aleramiirez/Minigames-Api" target="_blank" class="project-link">API →</a>
+          <a href="https://github.com/aleramiirez/Minigames" target="_blank" class="project-link">Game →</a>
+        </div>
+      </div>
+
+      <!-- Gestión Genérica -->
+      <div class="project-card reveal">
+        <div class="project-num">Proyecto 03</div>
+        <h3 class="project-title">Gestión Genérica</h3>
+        <p class="project-subtitle">Spring Boot · Microservicios · Azure · Kubernetes</p>
+        <p class="project-desc">
+          Proyecto de prácticas en ViewNext. Aplicación de gestión genérica con 6 microservicios: CRUD de usuario, seguridad con Spring Security, auditoría vía RabbitMQ, excepciones personalizadas, discovery service con Eureka y API Gateway. Front en Node.js. Dockerizado y desplegado en Azure con Kubernetes. Despliegue automatizado con Jenkins y GitHub Actions. Documentado con wikis en GitHub.
+        </p>
+        <div class="project-techs">
+          <span class="project-tech">Spring Boot</span>
+          <span class="project-tech">Spring Security</span>
+          <span class="project-tech">Eureka</span>
+          <span class="project-tech">RabbitMQ</span>
+          <span class="project-tech">Node.js</span>
+          <span class="project-tech">Jenkins</span>
+          <span class="project-tech">Azure</span>
+          <span class="project-tech">Kubernetes</span>
+        </div>
+        <a href="https://github.com/anavarroo/GestionGenericaP.git" target="_blank" class="project-link">
+          Ver en GitHub →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-header reveal">
+    <span class="section-num">05</span>
+    <h2 class="section-title">Formación</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="edu-grid">
+    <div class="edu-card reveal">
+      <div class="edu-year">Septiembre 2024 – Actualidad</div>
+      <h3 class="edu-degree">Grado en Ingeniería Informática de Software</h3>
+      <p class="edu-institution">Universidad de Sevilla</p>
+      <p class="edu-location">📍 Sevilla, España</p>
+    </div>
+
+    <div class="edu-card reveal">
+      <div class="edu-year">2022 – 2024</div>
+      <h3 class="edu-degree">Técnico Superior en Desarrollo de Aplicaciones Multiplataforma (DAM)</h3>
+      <p class="edu-institution">C.D.P. Santa Joaquina de Vedruna</p>
+      <p class="edu-location">📍 Sevilla, España</p>
+    </div>
+
+    <div class="edu-card reveal">
+      <div class="edu-year">2020 – 2022</div>
+      <h3 class="edu-degree">Título Bachillerato Tecnológico</h3>
+      <p class="edu-institution">IES Martínez Montañés</p>
+      <p class="edu-location">📍 Sevilla, España</p>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications" style="padding:0">
+  <div class="inner" style="padding-top: 7rem; padding-bottom: 7rem;">
+    <div class="section-header reveal">
+      <span class="section-num">06</span>
+      <h2 class="section-title">Cursos & Certificaciones</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div style="margin-top:1rem;">
+      <div class="cert-category-title reveal" style="margin-top:0;">Cloud, DevOps & Infraestructura</div>
+      <div class="certs-grid">
+        <a href="https://www.udemy.com/certificate/UC-8cfe951c-1878-4509-a351-bf534ca2573e/" target="_blank" class="cert-item reveal">
+          <div class="cert-dot"></div>
+          <div class="cert-info">
+            <div class="cert-name">OpenShift 4 desde 0</div>
+            <div class="cert-meta">Udemy · Expedición: Apr 2025</div>
+          </div>
+          <div class="cert-arrow">↗</div>
+        </a>
+        <a href="https://www.udemy.com/certificate/UC-b1f64f54-c414-4245-9e6b-45d5353a9dd2/" target="_blank" class="cert-item reveal">
+          <div class="cert-dot"></div>
+          <div class="cert-info">
+            <div class="cert-name">Helm 3: Despliega aplicaciones en Kubernetes</div>
+            <div class="cert-meta">Udemy · Expedición: Oct 2025</div>
+          </div>
+          <div class="cert-arrow">↗</div>
+        </a>
+        <a href="https://www.coursera.org/account/accomplishments/verify/ID7SV9TSZXZI" target="_blank" class="cert-item reveal">
+          <div class="cert-dot"></div>
+          <div class="cert-info">
+            <div class="cert-name">Google Cloud Fundamentals: Core Infrastructure</div>
+            <div class="cert-meta">Google · Expedición: Feb 2026</div>
+          </div>
+          <div class="cert-arrow">↗</div>
+        </a>
+      </div>
+
+      <div class="cert-category-title reveal">Desarrollo Backend & Arquitectura</div>
+      <div class="certs-grid">
+        <a href="https://www.udemy.com/certificate/UC-901431d6-349c-4612-92fd-b813bf4be329/" target="_blank" class="cert-item reveal">
+          <div class="cert-dot"></div>
+          <div class="cert-info">
+            <div class="cert-name">Apache Kafka Series – Learn Apache Kafka for Beginners v3</div>
+            <div class="cert-meta">Udemy · Expedición: Oct 2024</div>
+          </div>
+          <div class="cert-arrow">↗</div>
+        </a>
+        <a href="https://www.skills.google/public_profiles/7b4a9af7-27f8-4a60-8bfb-4fb381e0a21a/badges/21800353" target="_blank" class="cert-item reveal">
+          <div class="cert-dot"></div>
+          <div class="cert-info">
+            <div class="cert-name">Building Scalable Java Microservices with Spring Boot & Spring Cloud</div>
+            <div class="cert-meta">Google · Expedición: Ene 2026</div>
+          </div>
+          <div class="cert-arrow">↗</div>
+        </a>
+        <a href="https://www.coursera.org/account/accomplishments/verify/K89VBBJCOQ04" target="_blank" class="cert-item reveal">
+          <div class="cert-dot"></div>
+          <div class="cert-info">
+            <div class="cert-name">Google Cloud – Introduction to Generative AI</div>
+            <div class="cert-meta">Google · Expedición: Ene 2026</div>
+          </div>
+          <div class="cert-arrow">↗</div>
+        </a>
+      </div>
+
+      <div class="cert-category-title reveal">Metodologías Ágiles & Herramientas</div>
+      <div class="certs-grid">
+        <div class="cert-item reveal">
+          <div class="cert-dot"></div>
+          <div class="cert-info">
+            <div class="cert-name">Scrum Foundation Professional Certification (SFPC)</div>
+            <div class="cert-meta">CertiProf · Sep 2024 – Sep 2027 · ID: 100411010</div>
+          </div>
+        </div>
+        <a href="https://www.udemy.com/certificate/UC-fb5b8493-01b3-4d76-a349-f7775e19f001/" target="_blank" class="cert-item reveal">
+          <div class="cert-dot"></div>
+          <div class="cert-info">
+            <div class="cert-name">Notion 101</div>
+            <div class="cert-meta">Udemy · Expedición: Mar 2025</div>
+          </div>
+          <div class="cert-arrow">↗</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-eyebrow reveal">¿Hablamos?</div>
+  <h2 class="contact-title reveal">Trabajemos<br><em style="color:var(--gold)">juntos</em></h2>
+  <p class="contact-desc reveal">Abierto a nuevas oportunidades, colaboraciones y proyectos interesantes.</p>
+
+  <div class="contact-links reveal">
+    <a href="mailto:alejandro1052004@gmail.com" class="contact-item">
+      ✉️ alejandro1052004@gmail.com
+    </a>
+    <a href="tel:+34685817945" class="contact-item">
+      📱 685 81 79 45
+    </a>
+    <a href="http://www.linkedin.com/in/alejandro-ramirez-luque" target="_blank" class="contact-item">
+      💼 LinkedIn
+    </a>
+    <a href="https://github.com/aleramiirez" target="_blank" class="contact-item">
+      🐙 GitHub
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">AR</div>
+  <p>© 2025 Alejandro Ramírez · Software Developer · Sevilla, España</p>
+  <p style="opacity:0.5;">Diseñado con precisión</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  reveals.forEach(el => observer.observe(el));
+
+  // Nav scroll effect
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      nav.style.background = 'rgba(10,10,15,0.97)';
+    } else {
+      nav.style.background = 'rgba(10,10,15,0.85)';
+    }
+  });
+
+  // Smooth stagger for grid cards
+  document.querySelectorAll('.skills-grid .skill-card, .projects-grid .project-card, .certs-grid .cert-item').forEach((el, i) => {
+    el.style.transitionDelay = `${(i % 4) * 0.07}s`;
+  });
+</script>
+</body>
+</html>
