@@ -27,15 +27,3 @@ window.addEventListener('scroll', () => {
 document.querySelectorAll('.skills-grid .skill-card, .projects-grid .project-card, .certs-grid .cert-item').forEach((el, i) => {
   el.style.transitionDelay = `${(i % 4) * 0.07}s`;
 });
-
-// Reconstruir email en runtime (evita ofuscación de Cloudflare)
-document.querySelectorAll('[data-u][data-d]').forEach(el => {
-  const email = el.dataset.u + '@' + el.dataset.d;
-  el.href = 'mailto:' + email;
-  const span = el.querySelector('[data-email-text]');
-  if (span) {
-    span.textContent = email;
-  } else {
-    el.textContent = email;
-  }
-});
