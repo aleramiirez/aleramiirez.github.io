@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://aleramiirez.github.io/sitemap.xml

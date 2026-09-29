@@ -151,6 +151,21 @@ nav ul a:hover {
 .hero-name span {
   color: var(--gold);
   font-style: italic;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.hero-name span b {
+  display: inline-block;
+  font-weight: 300;
+  transform: translateY(100%);
+  animation: slideUp 0.8s 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes slideUp {
+  to {
+    transform: translateY(0);
+  }
 }
 
 .hero-title {
@@ -563,7 +578,7 @@ section {
   background: transparent;
   border: none;
   padding: 0;
-  height: 425px;
+  height: 480px;
   perspective: 1200px;
   cursor: pointer;
   overflow: hidden;
@@ -931,7 +946,7 @@ section {
 
 .arch-item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 1rem;
   padding: 0.7rem 1rem;
   background: rgba(255, 255, 255, 0.02);
@@ -943,8 +958,8 @@ section {
   font-size: 0.72rem;
   color: var(--gold);
   letter-spacing: 0.06em;
-  white-space: nowrap;
-  min-width: 160px;
+  flex: 0 0 160px;
+  line-height: 1.4;
 }
 
 .arch-desc {
@@ -1293,7 +1308,7 @@ footer .footer-logo {
   }
 
   .project-card {
-    height: 340px;
+    height: 420px;
   }
 
   .modal-features {
@@ -1301,7 +1316,7 @@ footer .footer-logo {
   }
 
   .arch-label {
-    min-width: 110px;
+    flex: 0 0 110px;
   }
 
   .modal-scroll {
