@@ -1117,6 +1117,25 @@ section {
   opacity: 1;
 }
 
+/* ─── CERT FEATURED (Certificaciones oficiales) ─── */
+.cert-featured {
+  border-left: 2px solid var(--gold);
+  background: rgba(201, 168, 76, 0.02);
+}
+
+.cert-featured:hover {
+  background: rgba(201, 168, 76, 0.06);
+}
+
+.cert-featured .cert-name {
+  color: var(--gold);
+}
+
+.cert-featured .cert-dot {
+  background: var(--gold);
+  box-shadow: 0 0 8px rgba(201, 168, 76, 0.35);
+}
+
 /* ─── CONTACT ─── */
 #contact {
   text-align: center;
