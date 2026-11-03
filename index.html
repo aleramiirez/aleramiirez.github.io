@@ -30,7 +30,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=3">
+  <link rel="stylesheet" href="assets/css/style.css?v=4">
 </head>
 
 <body>
@@ -205,7 +205,7 @@
         <div class="skill-icon">⚙️</div>
         <div class="skill-category">Lenguajes</div>
         <div class="skill-items">
-          <span class="skill-item">Java</span><span class="skill-item">Python</span><span
+          <span class="skill-item">Java</span><span class="skill-item">TypeScript</span><span class="skill-item">Python</span><span
             class="skill-item">C#</span><span class="skill-item">Dart</span><span
             class="skill-item">JavaScript</span><span class="skill-item">HTML/CSS</span>
         </div>
@@ -232,7 +232,7 @@
         <div class="skill-category">Bases de Datos</div>
         <div class="skill-items">
           <span class="skill-item">Oracle</span><span class="skill-item">SQL Server</span><span
-            class="skill-item">MySQL</span><span class="skill-item">PostgreSQL</span><span class="skill-item">MongoDB</span><span class="skill-item">Supabase</span>
+            class="skill-item">MySQL</span><span class="skill-item">PostgreSQL</span><span class="skill-item">MongoDB</span><span class="skill-item">Supabase</span><span class="skill-item">IndexedDB / Dexie</span>
         </div>
       </div>
       <div class="skill-card reveal">
@@ -266,7 +266,7 @@
         <div class="skill-icon">🛠️</div>
         <div class="skill-category">Herramientas</div>
         <div class="skill-items">
-          <span class="skill-item">Git</span><span class="skill-item">Maven</span><span class="skill-item">IntelliJ</span><span class="skill-item">VS
+          <span class="skill-item">Git</span><span class="skill-item">Playwright</span><span class="skill-item">Maven</span><span class="skill-item">IntelliJ</span><span class="skill-item">VS
             Code</span><span class="skill-item">Postman</span><span class="skill-item">Canva</span><span class="skill-item">Scrum / Agile</span><span class="skill-item">Notion</span>
         </div>
       </div>
@@ -284,11 +284,42 @@
 
       <div class="projects-grid">
 
+        <!-- Nexus Library (Destacado) -->
+        <div class="project-card featured reveal" onclick="openProject('nexus')">
+          <div class="project-card-inner">
+            <div class="project-card-front">
+              <div class="project-num">Proyecto 01 <span class="project-badge-live">En Producción</span></div>
+              <div class="project-preview-icon">🏛️</div>
+              <h3 class="project-title">Nexus Library</h3>
+              <p class="project-subtitle">React 18 · TypeScript · Local-First (Dexie) · Supabase · PWA</p>
+              <p class="project-brief">Santuario bibliotecario local-first en producción con estética Dark Academia. Persistencia inmediata sin conexión (IndexedDB), sincronización bidireccional cloud, Web Push y atlas literario interactivo.</p>
+              <div class="project-techs">
+                <span class="project-tech">React 18 + TS</span>
+                <span class="project-tech">Dexie / IndexedDB</span>
+                <span class="project-tech">Supabase BaaS</span>
+                <span class="project-tech">PWA & Push</span>
+              </div>
+              <div class="project-cta">Ver proyecto <span>→</span></div>
+            </div>
+            <div class="project-card-back">
+              <div class="project-back-tag">Proyecto 01 · App en Producción 🚀</div>
+              <h3 class="project-back-title">Nexus Library</h3>
+              <div class="project-back-highlights">
+                <div class="highlight-item"><span class="hi-icon">🏛️</span><span>Arquitectura Local-First con Dexie.js</span></div>
+                <div class="highlight-item"><span class="hi-icon">☁️</span><span>Sincronización Supabase, RLS y Web Push</span></div>
+                <div class="highlight-item"><span class="hi-icon">🗺️</span><span>Atlas Literario SVG y estantería 3D</span></div>
+                <div class="highlight-item"><span class="hi-icon">📊</span><span>2 Diagramas interactivos de arquitectura</span></div>
+              </div>
+              <div class="project-back-cta">Abrir detalle</div>
+            </div>
+          </div>
+        </div>
+
         <!-- Armario Virtual -->
         <div class="project-card reveal" onclick="openProject('armario')">
           <div class="project-card-inner">
             <div class="project-card-front">
-              <div class="project-num">Proyecto 01</div>
+              <div class="project-num">Proyecto 02</div>
               <div class="project-preview-icon">👔</div>
               <h3 class="project-title">Armario Virtual</h3>
               <p class="project-subtitle">Flutter · IA · GCP Serverless</p>
@@ -303,7 +334,7 @@
               <div class="project-cta">Ver proyecto <span>→</span></div>
             </div>
             <div class="project-card-back">
-              <div class="project-back-tag">Proyecto 01</div>
+              <div class="project-back-tag">Proyecto 02</div>
               <h3 class="project-back-title">Armario Virtual</h3>
               <div class="project-back-highlights">
                 <div class="highlight-item"><span class="hi-icon">🧠</span><span>Vision API + Translation API
@@ -324,7 +355,7 @@
         <div class="project-card reveal" onclick="openProject('minigames')">
           <div class="project-card-inner">
             <div class="project-card-front">
-              <div class="project-num">Proyecto 02</div>
+              <div class="project-num">Proyecto 03</div>
               <div class="project-preview-icon">🎮</div>
               <h3 class="project-title">Minigames Platform</h3>
               <p class="project-subtitle">Unity · C# · Spring Boot · Azure · K8s</p>
@@ -339,7 +370,7 @@
               <div class="project-cta">Ver proyecto <span>→</span></div>
             </div>
             <div class="project-card-back">
-              <div class="project-back-tag">Proyecto 02</div>
+              <div class="project-back-tag">Proyecto 03</div>
               <h3 class="project-back-title">Minigames Platform</h3>
               <div class="project-back-highlights">
                 <div class="highlight-item"><span class="hi-icon">🕹️</span><span>6 juegos: Pong, Flappy, Space
@@ -360,7 +391,7 @@
         <div class="project-card reveal" onclick="openProject('gestion')">
           <div class="project-card-inner">
             <div class="project-card-front">
-              <div class="project-num">Proyecto 03</div>
+              <div class="project-num">Proyecto 04</div>
               <div class="project-preview-icon">⚙️</div>
               <h3 class="project-title">Gestión Genérica</h3>
               <p class="project-subtitle">Spring Boot · 6 Microservicios · Azure</p>
@@ -375,7 +406,7 @@
               <div class="project-cta">Ver proyecto <span>→</span></div>
             </div>
             <div class="project-card-back">
-              <div class="project-back-tag">Proyecto 03</div>
+              <div class="project-back-tag">Proyecto 04</div>
               <h3 class="project-back-title">Gestión Genérica</h3>
               <div class="project-back-highlights">
                 <div class="highlight-item"><span class="hi-icon">🔒</span><span>Spring Security + auditoría
@@ -396,7 +427,7 @@
         <div class="project-card reveal" onclick="openProject('cheffy')">
           <div class="project-card-inner">
             <div class="project-card-front">
-              <div class="project-num">Proyecto 04</div>
+              <div class="project-num">Proyecto 05</div>
               <div class="project-preview-icon">🍳</div>
               <h3 class="project-title">Cheffy</h3>
               <p class="project-subtitle">React · Tailwind CSS · Supabase · Zustand · PWA</p>
@@ -410,44 +441,13 @@
               <div class="project-cta">Ver proyecto <span>→</span></div>
             </div>
             <div class="project-card-back">
-              <div class="project-back-tag">Proyecto 04</div>
+              <div class="project-back-tag">Proyecto 05</div>
               <h3 class="project-back-title">Cheffy</h3>
               <div class="project-back-highlights">
                 <div class="highlight-item"><span class="hi-icon">🛒</span><span>Gestión sincronizada en tiempo real</span></div>
                 <div class="highlight-item"><span class="hi-icon">🍳</span><span>Organización de recetas y platos</span></div>
                 <div class="highlight-item"><span class="hi-icon">📱</span><span>PWA instalable con diseño móvil</span></div>
                 <div class="highlight-item"><span class="hi-icon">☁️</span><span>Backend serverless con Supabase</span></div>
-              </div>
-              <div class="project-back-cta">Abrir detalle</div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- LibroVerse -->
-        <div class="project-card reveal" onclick="openProject('libroverse')">
-          <div class="project-card-inner">
-            <div class="project-card-front">
-              <div class="project-num">Proyecto 05</div>
-              <div class="project-preview-icon">📚</div>
-              <h3 class="project-title">LibroVerse</h3>
-              <p class="project-subtitle">React · Spring Boot · Java · Docker · Cloudinary</p>
-              <p class="project-brief">Plataforma web progresiva (PWA) para la gestión integral de una biblioteca digital personal, seguimiento de lectura e integración con Google Books.</p>
-              <div class="project-techs">
-                <span class="project-tech">React</span>
-                <span class="project-tech">Spring Boot</span>
-                <span class="project-tech">Java</span>
-                <span class="project-tech">Docker</span>
-              </div>
-              <div class="project-cta">Ver proyecto <span>→</span></div>
-            </div>
-            <div class="project-card-back">
-              <div class="project-back-tag">Proyecto 05</div>
-              <h3 class="project-back-title">LibroVerse</h3>
-              <div class="project-back-highlights">
-                <div class="highlight-item"><span class="hi-icon">📚</span><span>Organización por estado y sagas</span></div>
-                <div class="highlight-item"><span class="hi-icon">🔍</span><span>Autocompletado con API de Google Books</span></div>
-                <div class="highlight-item"><span class="hi-icon">☁️</span><span>Portadas en la nube con Cloudinary</span></div>
-                <div class="highlight-item"><span class="hi-icon">🔒</span><span>Seguridad Spring Security y JWT</span></div>
               </div>
               <div class="project-back-cta">Abrir detalle</div>
             </div>
@@ -461,6 +461,134 @@
   <!-- PROJECT OVERLAY -->
   <div id="project-overlay" onclick="closeProject()"></div>
 
+  <!-- MODAL: Nexus Library -->
+  <div class="project-modal" id="modal-nexus">
+    <button class="modal-close" onclick="closeProject()">✕</button>
+    <div class="modal-scroll">
+      <div class="modal-hero">
+        <span class="modal-icon">🏛️</span>
+        <div>
+          <div class="modal-tag">Proyecto 01 · Destacado · En Producción · Local-First · PWA</div>
+          <h2 class="modal-title">Nexus Library</h2>
+          <p class="modal-subtitle">Santuario bibliotecario personal con estética Dark Academia, arquitectura local-first soberana y sincronización cloud</p>
+        </div>
+      </div>
+      <div class="modal-links">
+        <a href="https://nexus-library.vercel.app/" target="_blank" class="modal-link-btn primary">🌐 Visitar App en Producción</a>
+        <a href="https://github.com/aleramiirez/Nexus-Library" target="_blank" class="modal-link-btn">🐙 Repositorio GitHub</a>
+        <a href="https://aleramiirez.github.io/Nexus-Library/" target="_blank" class="modal-link-btn">🏛️ Portal de Arquitectura</a>
+        <a href="https://aleramiirez.github.io/Nexus-Library/architecture/atlas-arquitectura.html" target="_blank" class="modal-link-btn">🗺️ Atlas de Arquitectura (6 Capas)</a>
+        <a href="https://aleramiirez.github.io/Nexus-Library/architecture/diagrama-arquitectura.html" target="_blank" class="modal-link-btn">⚡ Diagrama de Flujo Interactivo</a>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <h3>¿Qué es?</h3>
+          <p>Nexus Library es una plataforma web progresiva (PWA) de catalogación literaria y santuario bibliotecario desplegada en producción. Diseñada bajo una cuidada estética editorial <em>Dark Academia</em>, está pensada para coleccionistas y lectores voraces que buscan una experiencia cálida, táctil y privada.</p>
+          <p>Técnicamente, implementa un paradigma <strong>Local-First estricto</strong>: la base de datos local Dexie en IndexedDB es la fuente de verdad inmediata en el dispositivo del usuario, permitiendo un funcionamiento reactivo instantáneo e interactividad al 100% sin conexión a internet. Los datos se sincronizan de forma bidireccional y transparente con <strong>Supabase</strong> (PostgreSQL, Row-Level Security y Storage) en cuanto hay conexión de red, integrando notificaciones <strong>Web Push</strong> orquestadas mediante Edge Functions en Deno.</p>
+        </div>
+        <div class="modal-section">
+          <h3>Catálogo de funcionalidades</h3>
+          <div class="modal-features">
+            <div class="modal-feature">
+              <div class="mf-icon">📚</div>
+              <div>
+                <strong>Estantería Ceremonial 3D</strong>
+                <p>Mueble de roble tallado con hornacinas, lomos volumétricos interactivos, marcapáginas dinámicos y navegación táctil.</p>
+              </div>
+            </div>
+            <div class="modal-feature">
+              <div class="mf-icon">📖</div>
+              <div>
+                <strong>Ficha de Libro Abierto</strong>
+                <p>Despliegue ceremonial emulando un tomo abierto de dos páginas con pliegue central, costura física, sellos de lacre carmesí y animación FLIP.</p>
+              </div>
+            </div>
+            <div class="modal-feature">
+              <div class="mf-icon">🗺️</div>
+              <div>
+                <strong>Atlas Literario Cartográfico</strong>
+                <p>Mapa consular en SVG interactivo estilo siglo XIX que sella con tinta y banderas los países de origen de las obras y autores leídos.</p>
+              </div>
+            </div>
+            <div class="modal-feature">
+              <div class="mf-icon">⚡</div>
+              <div>
+                <strong>Arquitectura Local-First Soberana</strong>
+                <p>Persistencia inmediata en IndexedDB con Dexie.js y reactividad <code>useLiveQuery</code>. Modo invitado completo y migración transparente a la nube.</p>
+              </div>
+            </div>
+            <div class="modal-feature">
+              <div class="mf-icon">🔔</div>
+              <div>
+                <strong>PWA Offline & Web Push</strong>
+                <p>Instalable como app nativa con Service Worker (Cache Storage) y recepción de alertas y avisos en segundo plano vía Supabase Edge Functions y VAPID.</p>
+              </div>
+            </div>
+            <div class="modal-feature">
+              <div class="mf-icon">🎖️</div>
+              <div>
+                <strong>Códice de la Orden Nexus</strong>
+                <p>Escalafón honorífico de 10 rangos con cálculo determinista de experiencia (XP) sobre lecturas, páginas y retos, con carnet consular exportable.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-section">
+          <h3>Arquitectura Técnica y Módulos</h3>
+          <div class="modal-arch">
+            <div class="arch-item"><span class="arch-label">Frontend SPA (React 18 + TS + Vite)</span><span class="arch-desc">Tipado TypeScript estricto, división en chunks con <code>React.lazy</code>/<code>Suspense</code> (bundle inicial ~389 kB) y hooks de orquestación desacoplados.</span></div>
+            <div class="arch-item"><span class="arch-label">Almacenamiento Local (Dexie / IndexedDB)</span><span class="arch-desc">Fuente de verdad soberana en el cliente; consultas reactivas sin latencia de red ni bloqueos de interfaz.</span></div>
+            <div class="arch-item"><span class="arch-label">Backend as a Service (Supabase Cloud)</span><span class="arch-desc">PostgreSQL con columnas <code>JSONB</code> e índices GIN, Row-Level Security (RLS) estricto por usuario y canales WebSocket en tiempo real.</span></div>
+            <div class="arch-item"><span class="arch-label">Edge Functions & Push (Deno)</span><span class="arch-desc">Microservicio serverless en Deno (<code>send-book-push</code>) para el despacho cifrado de notificaciones Web Push firmadas con VAPID.</span></div>
+            <div class="arch-item"><span class="arch-label">Calidad & Pruebas E2E (Playwright)</span><span class="arch-desc">Suite automatizada de tests End-to-End para autenticación, persistencia Dexie, alta de obras y regresión visual. Conformidad WCAG 2.2 AA.</span></div>
+          </div>
+        </div>
+        <div class="modal-section">
+          <h3>Diagramas Interactivos de Arquitectura</h3>
+          <p>El proyecto incluye dos diagramas interactivos ejecutables de forma autónoma en el navegador para auditar e inspeccionar su ingeniería:</p>
+          <div class="modal-features" style="margin-top: 1rem;">
+            <div class="modal-feature">
+              <div class="mf-icon">🏛️</div>
+              <div>
+                <strong>Atlas de Arquitectura en 6 Capas</strong>
+                <p>Estratificación completa del sistema (UI, Servicios, Local-First, Supabase Cloud, APIs de Terceros y DevOps) con trazado interactivo de dependencias y recorridos guiados.</p>
+              </div>
+            </div>
+            <div class="modal-feature">
+              <div class="mf-icon">⚡</div>
+              <div>
+                <strong>Diagrama de Flujo y Conexiones</strong>
+                <p>Esquema animado que ilustra el ciclo de vida del dato paquete a paquete entre cliente, Dexie, Supabase Postgres, WebSockets y Edge Functions.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-section">
+          <h3>Infraestructura & Despliegue</h3>
+          <p>Desplegado en producción continua en <strong>Vercel</strong> con enrutamiento SPA y políticas de caché para PWA (<code>sw.js</code> y <code>manifest.json</code>), y portal de documentación y diagramas servido a través de <strong>GitHub Pages</strong>. La base de datos y servicios serverless operan bajo la infraestructura de <strong>Supabase Cloud</strong>.</p>
+        </div>
+        <div class="modal-section">
+          <h3>Stack técnico</h3>
+          <div class="modal-stack">
+            <span class="modal-tech">React 18</span>
+            <span class="modal-tech">TypeScript</span>
+            <span class="modal-tech">Vite 5</span>
+            <span class="modal-tech">Dexie.js (IndexedDB)</span>
+            <span class="modal-tech">Supabase</span>
+            <span class="modal-tech">PostgreSQL</span>
+            <span class="modal-tech">Tailwind CSS 3</span>
+            <span class="modal-tech">PWA (Service Workers)</span>
+            <span class="modal-tech">Web Push (VAPID)</span>
+            <span class="modal-tech">Deno Edge Functions</span>
+            <span class="modal-tech">Playwright E2E</span>
+            <span class="modal-tech">Web Audio API</span>
+            <span class="modal-tech">Vercel (Producción)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- MODAL: Armario Virtual -->
   <div class="project-modal" id="modal-armario">
     <button class="modal-close" onclick="closeProject()">✕</button>
@@ -468,7 +596,7 @@
       <div class="modal-hero">
         <span class="modal-icon">👔</span>
         <div>
-          <div class="modal-tag">Proyecto 01 · Flutter · GCP · Firebase · Serverless</div>
+          <div class="modal-tag">Proyecto 02 · Flutter · GCP · Firebase · Serverless</div>
           <h2 class="modal-title">Armario Virtual</h2>
           <p class="modal-subtitle">App móvil con motor de IA en la nube para gestión inteligente del vestuario personal
           </p>
@@ -587,7 +715,7 @@
       <div class="modal-hero">
         <span class="modal-icon">🎮</span>
         <div>
-          <div class="modal-tag">Proyecto 02 · Unity · C# · Spring Boot · Azure · Kubernetes</div>
+          <div class="modal-tag">Proyecto 03 · Unity · C# · Spring Boot · Azure · Kubernetes</div>
           <h2 class="modal-title">Minigames Platform</h2>
           <p class="modal-subtitle">Plataforma de entretenimiento completa: cliente Unity con 6 juegos y backend de
             microservicios</p>
@@ -665,7 +793,7 @@
       <div class="modal-hero">
         <span class="modal-icon">⚙️</span>
         <div>
-          <div class="modal-tag">Proyecto 03 · Spring Boot · Node.js · Azure · Kubernetes</div>
+          <div class="modal-tag">Proyecto 04 · Spring Boot · Node.js · Azure · Kubernetes</div>
           <h2 class="modal-title">Gestión Genérica</h2>
           <p class="modal-subtitle">Prácticas ViewNext — Ecosistema de 6 microservicios con CI/CD completo y despliegue
             en Azure</p>
@@ -741,7 +869,7 @@
       <div class="modal-hero">
         <span class="modal-icon">🍳</span>
         <div>
-          <div class="modal-tag">Proyecto 04 · React · Tailwind CSS · Supabase · Zustand · PWA</div>
+          <div class="modal-tag">Proyecto 05 · React · Tailwind CSS · Supabase · Zustand · PWA</div>
           <h2 class="modal-title">Cheffy</h2>
           <p class="modal-subtitle">Aplicación web progresiva "mobile-first" para la gestión inteligente de la despensa y recetario</p>
         </div>
@@ -817,98 +945,6 @@
             <span class="modal-tech">Supabase</span>
             <span class="modal-tech">PostgreSQL</span>
             <span class="modal-tech">PWA</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODAL: LibroVerse -->
-  <div class="project-modal" id="modal-libroverse">
-    <button class="modal-close" onclick="closeProject()">✕</button>
-    <div class="modal-scroll">
-      <div class="modal-hero">
-        <span class="modal-icon">📚</span>
-        <div>
-          <div class="modal-tag">Proyecto 05 · React · Spring Boot · Java · Docker · Cloudinary</div>
-          <h2 class="modal-title">LibroVerse</h2>
-          <p class="modal-subtitle">Plataforma web progresiva para la gestión integral de una biblioteca digital personal</p>
-        </div>
-      </div>
-      <div class="modal-links">
-        <a href="https://github.com/aleramiirez/LibroVerse-front" target="_blank" class="modal-link-btn">🐙 Frontend Repo</a>
-        <a href="https://github.com/aleramiirez/LibroVerse-Api" target="_blank" class="modal-link-btn">🐙 Backend Repo</a>
-      </div>
-      <div class="modal-body">
-        <div class="modal-section">
-          <h3>¿Qué es?</h3>
-          <p>LibroVerse es una aplicación diseñada para que los lectores asiduos puedan llevar un control exhaustivo de su colección de e-books. Compuesta por una arquitectura cliente-servidor, ofrece un frontend moderno e instalable (PWA) interactuando con una API RESTful robusta. Facilita enormemente el registro de nuevas lecturas gracias a su integración con servicios externos para autocompletar la información de los libros, al mismo tiempo que muestra métricas visuales del progreso del usuario.</p>
-        </div>
-        <div class="modal-section">
-          <h3>Catálogo de funcionalidades</h3>
-          <div class="modal-features">
-            <div class="modal-feature">
-              <div class="mf-icon">📊</div>
-              <div>
-                <strong>Dashboard Estadístico</strong>
-                <p>Tarjetas de resumen y métricas visuales del progreso y hábitos de lectura.</p>
-              </div>
-            </div>
-            <div class="modal-feature">
-              <div class="mf-icon">📖</div>
-              <div>
-                <strong>Gestión de Biblioteca</strong>
-                <p>Seguimiento del estado individual de cada e-book (leyendo, pendiente, finalizado).</p>
-              </div>
-            </div>
-            <div class="modal-feature">
-              <div class="mf-icon">📚</div>
-              <div>
-                <strong>Sistema de Sagas</strong>
-                <p>Agrupación lógica y estructurada de libros pertenecientes a una misma serie o colección.</p>
-              </div>
-            </div>
-            <div class="modal-feature">
-              <div class="mf-icon">🔎</div>
-              <div>
-                <strong>Buscador Inteligente</strong>
-                <p>Búsqueda automatizada para importar metadatos directamente desde Google Books.</p>
-              </div>
-            </div>
-            <div class="modal-feature">
-              <div class="mf-icon">📱</div>
-              <div>
-                <strong>Experiencia App (PWA)</strong>
-                <p>Manifiesto web integrado para permitir la instalación nativa en dispositivos.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-section">
-          <h3>Arquitectura y Módulos</h3>
-          <div class="modal-arch">
-            <div class="arch-item"><span class="arch-label">Backend RESTful (Java + Spring Boot)</span><span class="arch-desc">API estructurada en múltiples capas (Controladores, Servicios, Repositorios, DTOs) para garantizar un código limpio y escalable.</span></div>
-            <div class="arch-item"><span class="arch-label">Frontend SPA (React + Vite)</span><span class="arch-desc">Interfaz fluida con enrutamiento protegido y gestión de estado mediante Context API (AuthContext).</span></div>
-            <div class="arch-item"><span class="arch-label">Seguridad y Autenticación</span><span class="arch-desc">Implementación de seguridad a nivel de rutas e interceptores con Spring Security, utilizando filtros personalizados para tokens JWT (JwtAuthenticationFilter).</span></div>
-            <div class="arch-item"><span class="arch-label">Gestión de Archivos en la nube</span><span class="arch-desc">Integración nativa a través de un servicio propio (CloudinaryFileServiceImpl) para subir, almacenar y servir las imágenes de las portadas de forma eficiente.</span></div>
-          </div>
-        </div>
-        <div class="modal-section">
-          <h3>Infraestructura & DevOps</h3>
-          <p>El ecosistema del servidor está completamente preparado para entornos productivos. El backend está contenerizado mediante <strong>Docker</strong>, con orquestación disponible a través de <strong>Docker Compose</strong>. Además, el ciclo de vida del desarrollo cuenta con flujos de Integración y Despliegue Continuo (CI/CD) automatizados mediante <strong>GitHub Actions</strong> (deploy-backend.yaml).</p>
-        </div>
-        <div class="modal-section">
-          <h3>Stack técnico</h3>
-          <div class="modal-stack">
-            <span class="modal-tech">Java 21</span>
-            <span class="modal-tech">Spring Boot</span>
-            <span class="modal-tech">Spring Security</span>
-            <span class="modal-tech">React</span>
-            <span class="modal-tech">Vite</span>
-            <span class="modal-tech">Docker</span>
-            <span class="modal-tech">Cloudinary API</span>
-            <span class="modal-tech">Google Books API</span>
-            <span class="modal-tech">GitHub Actions</span>
           </div>
         </div>
       </div>
