@@ -13,9 +13,11 @@ reveals.forEach(el => observer.observe(el));
 // Nav scroll effect
 const nav = document.querySelector('nav');
 window.addEventListener('scroll', () => {
-  nav.style.background = window.scrollY > 50
-    ? 'rgba(10,10,15,0.97)'
-    : 'rgba(10,10,15,0.85)';
+  if (window.scrollY > 50) {
+    nav.classList.add('scrolled');
+  } else {
+    nav.classList.remove('scrolled');
+  }
 });
 
 // Stagger cards

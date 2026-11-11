@@ -1,18 +1,82 @@
-:root {
+:root,
+html[data-theme='dark'] {
+  color-scheme: dark;
   --bg: #0a0a0f;
   --bg2: #0f0f18;
   --bg3: #13131f;
   --card: #111120;
+  --card-back: linear-gradient(135deg, #0f0f1e 0%, #111128 100%);
   --gold: #c9a84c;
   --gold-light: #e8c97a;
   --gold-dim: rgba(201, 168, 76, 0.15);
   --gold-border: rgba(201, 168, 76, 0.25);
+  --gold-shadow: rgba(201, 168, 76, 0.3);
   --text: #e8e4da;
   --text-dim: #8a8474;
   --text-mid: #b8b0a0;
   --accent: #4c7ac9;
+  --accent-dim: rgba(76, 122, 201, 0.08);
+  --accent-border: rgba(76, 122, 201, 0.25);
   --accent2: #c94c7a;
   --white: #f5f2ed;
+  --heading: #f5f2ed;
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-subtle-2: rgba(255, 255, 255, 0.04);
+  --card-surface: rgba(255, 255, 255, 0.03);
+  --card-surface-hover: rgba(255, 255, 255, 0.05);
+  --nav-bg: rgba(10, 10, 15, 0.85);
+  --nav-bg-scrolled: rgba(10, 10, 15, 0.97);
+  --modal-bg: #11111f;
+  --modal-overlay: rgba(0, 0, 0, 0.85);
+  --modal-shadow: 0 25px 70px rgba(0, 0, 0, 0.5);
+  --noise-opacity: 0.35;
+  --shadow-card: 0 20px 60px rgba(0, 0, 0, 0.3);
+  --btn-gold-text: #0a0a0f;
+  --hero-glow-1: rgba(76, 122, 201, 0.06);
+  --hero-glow-2: rgba(201, 168, 76, 0.04);
+  --badge-live-color: #4ade80;
+  --badge-live-bg: rgba(74, 222, 128, 0.1);
+  --badge-live-border: rgba(74, 222, 128, 0.3);
+}
+
+html[data-theme='light'] {
+  color-scheme: light;
+  --bg: #f8f6f0;
+  --bg2: #f0ece1;
+  --bg3: #e6e0d2;
+  --card: #ffffff;
+  --card-back: linear-gradient(135deg, #ffffff 0%, #f6f3eb 100%);
+  --gold: #9d7729;
+  --gold-light: #b48a33;
+  --gold-dim: rgba(157, 119, 41, 0.1);
+  --gold-border: rgba(157, 119, 41, 0.24);
+  --gold-shadow: rgba(157, 119, 41, 0.25);
+  --text: #1d1c24;
+  --text-dim: #6c6860;
+  --text-mid: #413e37;
+  --accent: #2b59a2;
+  --accent-dim: rgba(43, 89, 162, 0.08);
+  --accent-border: rgba(43, 89, 162, 0.22);
+  --accent2: #b83d6a;
+  --white: #121118;
+  --heading: #121118;
+  --border-subtle: rgba(29, 28, 36, 0.08);
+  --border-subtle-2: rgba(29, 28, 36, 0.05);
+  --card-surface: rgba(29, 28, 36, 0.03);
+  --card-surface-hover: rgba(29, 28, 36, 0.05);
+  --nav-bg: rgba(248, 246, 240, 0.88);
+  --nav-bg-scrolled: rgba(248, 246, 240, 0.98);
+  --modal-bg: #fdfbf7;
+  --modal-overlay: rgba(18, 17, 24, 0.55);
+  --modal-shadow: 0 25px 70px rgba(0, 0, 0, 0.12), 0 10px 25px rgba(0, 0, 0, 0.06);
+  --noise-opacity: 0.16;
+  --shadow-card: 0 12px 35px rgba(29, 28, 36, 0.05), 0 2px 6px rgba(29, 28, 36, 0.02);
+  --btn-gold-text: #ffffff;
+  --hero-glow-1: rgba(43, 89, 162, 0.05);
+  --hero-glow-2: rgba(157, 119, 41, 0.06);
+  --badge-live-color: #15803d;
+  --badge-live-bg: rgba(21, 128, 61, 0.09);
+  --badge-live-border: rgba(21, 128, 61, 0.25);
 }
 
 *,
@@ -25,6 +89,7 @@
 
 html {
   scroll-behavior: smooth;
+  background: var(--bg);
 }
 
 body {
@@ -43,7 +108,7 @@ body::before {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 999;
-  opacity: 0.4;
+  opacity: var(--noise-opacity);
 }
 
 /* ─── NAV ─── */
@@ -57,10 +122,21 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem 4rem;
-  background: rgba(10, 10, 15, 0.85);
+  background: var(--nav-bg);
   backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(201, 168, 76, 0.08);
-  transition: all 0.3s ease;
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--gold-border);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+nav.scrolled {
+  background: var(--nav-bg-scrolled);
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 2.2rem;
 }
 
 nav .logo {
@@ -92,6 +168,78 @@ nav ul a:hover {
   color: var(--gold);
 }
 
+/* ─── THEME TOGGLE ─── */
+.theme-toggle {
+  position: relative;
+  z-index: 1001; /* Above ink canvas (1000) */
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 1px solid var(--gold-border);
+  border-radius: 50%;
+  background: var(--card);
+  color: var(--gold);
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.25s ease, background 0.25s ease, color 0.25s ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+  transform: rotate(-12deg) scale(1.08);
+  border-color: var(--gold);
+  background: var(--gold-dim);
+}
+
+.theme-toggle:active {
+  transform: scale(0.92);
+}
+
+.theme-toggle__icon {
+  overflow: visible;
+}
+
+.theme-toggle__body {
+  fill: currentColor;
+}
+
+.theme-toggle__rays {
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+
+/* ─── INK CANVAS & CSS FALLBACK ─── */
+.ink-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.ink-canvas.is-active {
+  visibility: visible;
+}
+
+html.theme-fade,
+html.theme-fade *,
+html.theme-fade *::before,
+html.theme-fade *::after {
+  transition:
+    background-color var(--theme-fade, 0.45s) ease,
+    border-color var(--theme-fade, 0.45s) ease,
+    color var(--theme-fade, 0.45s) ease,
+    fill var(--theme-fade, 0.45s) ease,
+    stroke var(--theme-fade, 0.45s) ease,
+    box-shadow var(--theme-fade, 0.45s) ease !important;
+}
+
 /* ─── HERO ─── */
 #hero {
   min-height: 100vh;
@@ -106,8 +254,8 @@ nav ul a:hover {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 60% 50% at 70% 50%, rgba(76, 122, 201, 0.06) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 60% at 20% 80%, rgba(201, 168, 76, 0.04) 0%, transparent 50%);
+    radial-gradient(ellipse 60% 50% at 70% 50%, var(--hero-glow-1) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 60% at 20% 80%, var(--hero-glow-2) 0%, transparent 50%);
 }
 
 .hero-line {
@@ -215,13 +363,13 @@ nav ul a:hover {
 
 .btn-gold {
   background: var(--gold);
-  color: #0a0a0f;
+  color: var(--btn-gold-text);
 }
 
 .btn-gold:hover {
   background: var(--gold-light);
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(201, 168, 76, 0.3);
+  box-shadow: 0 8px 30px var(--gold-shadow);
 }
 
 .btn-outline {
@@ -317,7 +465,7 @@ section {
 
 /* ─── ABOUT ─── */
 #about {
-  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  border-top: 1px solid var(--border-subtle-2);
 }
 
 .about-grid {
@@ -352,7 +500,7 @@ section {
 
 .meta-item:hover {
   border-color: var(--gold);
-  background: rgba(201, 168, 76, 0.04);
+  background: var(--gold-dim);
 }
 
 .meta-icon {
@@ -401,13 +549,13 @@ section {
   top: 0;
   bottom: 0;
   width: 1px;
-  background: linear-gradient(to bottom, var(--gold-border), rgba(201, 168, 76, 0.05));
+  background: linear-gradient(to bottom, var(--gold-border), var(--gold-dim));
 }
 
 .exp-item {
   position: relative;
   padding: 2.5rem 0 2.5rem 3rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid var(--border-subtle-2);
 }
 
 .exp-item:last-child {
@@ -491,11 +639,12 @@ section {
 
 .skill-card {
   background: var(--card);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-subtle);
   padding: 2rem;
   transition: all 0.3s;
   position: relative;
   overflow: hidden;
+  box-shadow: var(--shadow-card);
 }
 
 .skill-card::before {
@@ -513,7 +662,7 @@ section {
 .skill-card:hover {
   border-color: var(--gold-border);
   transform: translateY(-4px);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-card);
 }
 
 .skill-card:hover::before {
@@ -543,9 +692,9 @@ section {
 .skill-item {
   font-size: 0.8rem;
   color: var(--text-mid);
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--card-surface);
   padding: 0.25rem 0.6rem;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-subtle);
   transition: all 0.2s;
 }
 
@@ -602,7 +751,7 @@ section {
   inset: 0;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-subtle);
   padding: 2rem;
   display: flex;
   flex-direction: column;
@@ -610,8 +759,8 @@ section {
 }
 
 .project-card.featured .project-card-front {
-  border-color: rgba(201, 168, 76, 0.4);
-  box-shadow: 0 0 30px rgba(201, 168, 76, 0.08);
+  border-color: var(--gold-border);
+  box-shadow: 0 0 30px var(--gold-dim);
 }
 
 .project-badge-live {
@@ -620,9 +769,9 @@ section {
   gap: 0.35rem;
   font-family: 'DM Mono', monospace;
   font-size: 0.58rem;
-  color: #4ade80;
-  background: rgba(74, 222, 128, 0.1);
-  border: 1px solid rgba(74, 222, 128, 0.3);
+  color: var(--badge-live-color);
+  background: var(--badge-live-bg);
+  border: 1px solid var(--badge-live-border);
   padding: 0.15rem 0.5rem;
   border-radius: 999px;
   margin-left: 0.5rem;
@@ -637,13 +786,13 @@ section {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: #4ade80;
-  box-shadow: 0 0 6px #4ade80;
+  background: var(--badge-live-color);
+  box-shadow: 0 0 6px var(--badge-live-color);
 }
 
 .project-card-back {
   transform: rotateY(180deg);
-  background: linear-gradient(135deg, #0f0f1e 0%, #111128 100%);
+  background: var(--card-back);
   border-color: var(--gold-border);
   justify-content: center;
 }
@@ -698,9 +847,9 @@ section {
   font-family: 'DM Mono', monospace;
   font-size: 0.6rem;
   color: var(--accent);
-  border: 1px solid rgba(76, 122, 201, 0.25);
+  border: 1px solid var(--accent-border);
   padding: 0.2rem 0.6rem;
-  background: rgba(76, 122, 201, 0.06);
+  background: var(--accent-dim);
 }
 
 .project-cta {
@@ -768,7 +917,7 @@ section {
 }
 
 .project-back-cta:hover {
-  background: rgba(201, 168, 76, 0.25);
+  background: var(--gold-border);
 }
 
 /* ─── PROJECT MODAL ─── */
@@ -776,7 +925,7 @@ section {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.85);
+  background: var(--modal-overlay);
   z-index: 200;
   backdrop-filter: blur(8px);
   opacity: 0;
@@ -798,8 +947,9 @@ section {
   transform: translate(-50%, -50%) scale(0.85);
   width: min(800px, 92vw);
   max-height: 85vh;
-  background: var(--bg3);
+  background: var(--modal-bg);
   border: 1px solid var(--gold-border);
+  box-shadow: var(--modal-shadow);
   z-index: 300;
   display: none;
   flex-direction: column;
@@ -829,8 +979,8 @@ section {
   position: absolute;
   top: 1rem;
   right: 1rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--card-surface);
+  border: 1px solid var(--border-subtle);
   color: var(--text-dim);
   width: 32px;
   height: 32px;
@@ -854,7 +1004,7 @@ section {
   gap: 1.5rem;
   margin-bottom: 1.5rem;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .modal-icon {
@@ -911,20 +1061,20 @@ section {
 
 .modal-link-btn:hover {
   border-color: var(--gold);
-  background: rgba(201, 168, 76, 0.2);
+  background: var(--gold-border);
 }
 
 .modal-link-btn.primary {
   background: var(--gold);
-  color: var(--bg);
+  color: var(--btn-gold-text);
   font-weight: 500;
   border-color: var(--gold);
 }
 
 .modal-link-btn.primary:hover {
-  background: #dfbc62;
-  color: var(--bg);
-  box-shadow: 0 0 15px rgba(201, 168, 76, 0.35);
+  background: var(--gold-light);
+  color: var(--btn-gold-text);
+  box-shadow: 0 0 15px var(--gold-shadow);
 }
 
 .modal-body {
@@ -940,7 +1090,7 @@ section {
   font-weight: 400;
   margin-bottom: 1rem;
   padding-bottom: 0.5rem;
-  border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+  border-bottom: 1px solid var(--gold-border);
 }
 
 .modal-section p {
@@ -959,8 +1109,8 @@ section {
   display: flex;
   gap: 0.8rem;
   padding: 1rem;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--card-surface);
+  border: 1px solid var(--border-subtle);
 }
 
 .mf-icon {
@@ -994,7 +1144,7 @@ section {
   align-items: flex-start;
   gap: 1rem;
   padding: 0.7rem 1rem;
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--card-surface);
   border-left: 2px solid var(--gold-border);
 }
 
@@ -1036,8 +1186,8 @@ section {
 
 .game-chip {
   padding: 0.4rem 0.9rem;
-  background: rgba(76, 122, 201, 0.1);
-  border: 1px solid rgba(76, 122, 201, 0.25);
+  background: var(--accent-dim);
+  border: 1px solid var(--accent-border);
   color: var(--accent);
   font-size: 0.8rem;
   font-family: 'DM Mono', monospace;
@@ -1052,7 +1202,7 @@ section {
 
 .edu-card {
   padding: 2rem;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-subtle);
   background: var(--card);
   transition: all 0.3s;
 }
@@ -1124,7 +1274,7 @@ section {
   display: flex;
   gap: 1rem;
   padding: 1.2rem;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
   background: var(--card);
   transition: all 0.3s;
   text-decoration: none;
@@ -1134,7 +1284,7 @@ section {
 
 .cert-item:hover {
   border-color: var(--gold-border);
-  background: rgba(201, 168, 76, 0.03);
+  background: var(--gold-dim);
   transform: translateX(4px);
 }
 
@@ -1256,7 +1406,7 @@ section {
 
 /* ─── FOOTER ─── */
 footer {
-  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  border-top: 1px solid var(--border-subtle-2);
   padding: 2rem 4rem;
   display: flex;
   justify-content: space-between;

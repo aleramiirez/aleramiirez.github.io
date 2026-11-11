@@ -25,12 +25,23 @@
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
+  <!-- Theme Init (Prevents FOUC) -->
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('portfolio-theme');
+        var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.dataset.theme = theme;
+      } catch (e) {}
+    })();
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=4">
+  <link rel="stylesheet" href="assets/css/style.css?v=5">
 </head>
 
 <body>
@@ -38,15 +49,40 @@
   <!-- NAV -->
   <nav>
     <a href="#hero" class="logo">AR</a>
-    <ul>
-      <li><a href="#about">Sobre mí</a></li>
-      <li><a href="#experience">Experiencia</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Proyectos</a></li>
-      <li><a href="#education">Educación</a></li>
-      <li><a href="#certifications">Cursos</a></li>
-      <li><a href="#contact">Contacto</a></li>
-    </ul>
+    <div class="nav-right">
+      <ul>
+        <li><a href="#about">Sobre mí</a></li>
+        <li><a href="#experience">Experiencia</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Proyectos</a></li>
+        <li><a href="#education">Educación</a></li>
+        <li><a href="#certifications">Cursos</a></li>
+        <li><a href="#contact">Contacto</a></li>
+      </ul>
+      <button
+        class="theme-toggle"
+        id="theme-toggle"
+        type="button"
+        aria-label="Cambiar tema claro/oscuro"
+        aria-pressed="false"
+        title="Cambiar tema (T)"
+        data-ink-live
+      >
+        <svg class="theme-toggle__icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+          <path class="theme-toggle__body" d="M12 7a5 5 0 1 1 0 10a5 5 0 1 1 0-10z" />
+          <g class="theme-toggle__rays">
+            <line x1="12" y1="1.5" x2="12" y2="3.5" />
+            <line x1="12" y1="20.5" x2="12" y2="22.5" />
+            <line x1="1.5" y1="12" x2="3.5" y2="12" />
+            <line x1="20.5" y1="12" x2="22.5" y2="12" />
+            <line x1="4.58" y1="4.58" x2="6" y2="6" />
+            <line x1="18" y1="18" x2="19.42" y2="19.42" />
+            <line x1="4.58" y1="19.42" x2="6" y2="18" />
+            <line x1="18" y1="6" x2="19.42" y2="4.58" />
+          </g>
+        </svg>
+      </button>
+    </div>
   </nav>
 
   <!-- HERO -->
@@ -1129,6 +1165,7 @@
     <p style="opacity:0.5;">Mi Portfolio</p>
   </footer>
 
+  <script src="assets/js/ink-bleed.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
 
