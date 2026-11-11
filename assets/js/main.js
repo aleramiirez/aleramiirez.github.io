@@ -26,6 +26,13 @@ window.addEventListener('mousemove', (e) => {
   document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
 }, { passive: true });
 
+window.addEventListener('touchmove', (e) => {
+  if (e.touches && e.touches[0]) {
+    document.documentElement.style.setProperty('--mouse-x', `${e.touches[0].clientX}px`);
+    document.documentElement.style.setProperty('--mouse-y', `${e.touches[0].clientY}px`);
+  }
+}, { passive: true });
+
 // Stagger cards
 document.querySelectorAll('.skills-grid .skill-card, .certs-grid .cert-item').forEach((el, i) => {
   el.style.transitionDelay = `${(i % 4) * 0.07}s`;
